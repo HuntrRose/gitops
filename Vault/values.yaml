@@ -1,7 +1,19 @@
 server:
   dataStorage:
-    enabled: true
-    existingClaim: vault-data-pvc
+    enabled: false
+    
   auditStorage:
-    enabled: true
-    existingClaim: vault-audit-pvc
+    enabled: false
+csi:
+  volumes:
+    - name: vault-data
+      persistentVolumeClaim:
+        claimName: vault-data-pvc
+    - name: vault-audit
+      persistentVolumeClaim:
+        claimName: vault-audit-pvc
+  volumeMounts:
+    - name: vault-data
+      mountPath: /vault/data
+    - name: vault-audit
+      mountPath: /vault/audit
