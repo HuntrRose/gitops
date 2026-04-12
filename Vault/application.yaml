@@ -10,7 +10,7 @@ spec:
       chart: vault
       targetRevision: 0.32.0
       helm:
-        valuesFiles:
+        valueFiles:
           - $values/values.yaml
           
     - repoURL: https://github.com/huntrrose/gitops.git
