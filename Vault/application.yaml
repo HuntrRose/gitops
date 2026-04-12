@@ -10,17 +10,16 @@ spec:
       chart: vault
       targetRevision: 0.32.0
       helm:
-        values: |
-          server:
-            dataStorage:
-              enabled: true
-              existingClaim: vault-data-pvc
-            auditStorage:
-              enabled: true
-              existingClaim: vault-audit-pvc
+        valuesFiles:
+          - $values/values.yaml
+          
     - repoURL: https://github.com/huntrrose/gitops.git
       path: Vault
       targetRevision: HEAD
+    - repoURL: https://github.com/huntrrose/gitops.git
+      path: Vault
+      ref: values
+
   destination:
     server: https://kubernetes.default.svc
     namespace: vault

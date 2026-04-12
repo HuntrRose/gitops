@@ -1,0 +1,7 @@
+server:
+  dataStorage:
+    enabled: true
+    existingClaim: vault-data-pvc
+  auditStorage:
+    enabled: true
+    existingClaim: vault-audit-pvc
