@@ -1,19 +1,12 @@
 server:
   dataStorage:
-    enabled: false
+    enabled: true
+    existingClaim: vault-data-pvc 
     
   auditStorage:
-    enabled: false
-csi:
-  volumes:
-    - name: vault-data
-      persistentVolumeClaim:
-        claimName: vault-data-pvc
-    - name: vault-audit
-      persistentVolumeClaim:
-        claimName: vault-audit-pvc
-  volumeMounts:
-    - name: vault-data
-      mountPath: /vault/data
-    - name: vault-audit
-      mountPath: /vault/audit
+    enabled: true
+    existingClaim: vault-audit-pvc
+ui:
+  enabled: true
+  serviceType: LoadBalancer
+  externalPort: 8200
