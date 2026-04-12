@@ -17,6 +17,7 @@ spec:
       path: Vault
       targetRevision: HEAD
     - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
       path: Vault
       ref: values
 
