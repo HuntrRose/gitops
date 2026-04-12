@@ -13,10 +13,12 @@ spec:
         valueFiles:
           - $values/Vault/values.yaml
           
-
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       path: Vault
+      
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
       ref: values
 
   destination:
