@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-csi-test
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-csi-test
+  template:
+    metadata:
+      labels:
+        app: nfs-csi-test
+    spec:
+      containers:
+        - name: nfs-csi-test
+          image: busybox
+          volumeMounts:
+            - name: nfs-csi-test-volume
+              mountPath: /mnt/test
+      volumes:
+        - name: nfs-csi-test-volume
+          persistentVolumeClaim:
+            claimName: nfs-csi-test-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-csi-test-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-server
