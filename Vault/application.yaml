@@ -11,7 +11,7 @@ spec:
       targetRevision: 0.32.0
       helm:
         valueFiles:
-          - $values/values.yaml
+          - $values/Vault/values.yaml
           
 
     - repoURL: https://github.com/huntrrose/gitops.git
