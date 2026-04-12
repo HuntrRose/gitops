@@ -21,29 +21,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: vault-data-pvc
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 5Gi
-  storageClassName: nfs-server
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: vault-audit-pvc
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 5Gi
-  storageClassName: nfs-server
