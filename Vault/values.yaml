@@ -1,11 +1,18 @@
 server:
   dataStorage:
     enabled: true
-    existingClaim: vault-data-pvc 
+    mountPath: /vault/data
+    storageClass: nfs-server
+    accessMode: ReadWriteOnce
+    size: 1Gi
     
   auditStorage:
     enabled: true
-    existingClaim: vault-audit-pvc
+    mountPath: /vault/audit
+    storageClass: nfs-server
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
 ui:
   enabled: true
   serviceType: LoadBalancer
