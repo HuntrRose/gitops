@@ -5,14 +5,16 @@ server:
     storageClass: nfs-server
     accessMode: ReadWriteOnce
     size: 1Gi
-    
+    annotations: {}
+    labels: {}
   auditStorage:
     enabled: true
     mountPath: /vault/audit
     storageClass: nfs-server
     accessMode: ReadWriteOnce
     size: 1Gi
-
+    annotations: {}
+    labels: {}
 ui:
   enabled: true
   serviceType: LoadBalancer
