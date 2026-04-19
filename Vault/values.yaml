@@ -1,10 +1,11 @@
 server:
   dataStorage:
-    enabled: false
-    
+    enabled: true
+    size: 1Gi
   auditStorage:
-    enabled: false
-csi:
+    enabled: true
+    size: 1Gi
+
   volumes:
     - name: vault-data
       persistentVolumeClaim:

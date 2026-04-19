@@ -15,24 +15,38 @@ spec:
     spec:
       containers:
         - name: nfs-csi-test
-          image: busybox
-          volumeMounts:
-            - name: nfs-csi-test-volume
-              mountPath: /mnt/test
-      volumes:
-        - name: nfs-csi-test-volume
-          persistentVolumeClaim:
-            claimName: nfs-csi-test-pvc
+          image: alpine:latest
+          
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
 metadata:
-  name: nfs-csi-test-pvc
+  name: nfs-csi-test-secret
   namespace: default
 spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: nfs-server
+  vaultAuthRef: nfs-csi-test-auth
+  type: kv-v2
+  mount: k8s
+  path: test/unifiMongoCreds
+  refreshAfter: 60s
+  destination:
+    name: nfs-csi-test-secret-creds
+    create: true
+  rolloutRestartTargets:
+  - kind: Deployment
+    name: nfs-csi-test
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: nfs-csi-test-auth
+  namespace: default
+spec:
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: test_role
+    serviceAccount: default
+    #tokenExpirationSeconds: 600
+    audiences: 
+      - vault
