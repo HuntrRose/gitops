@@ -43,10 +43,10 @@ spec:
           value: admin
         resources:
           requests:
-            memory: "256Mi"
+            memory: "1024Mi"
             cpu: "250m"
           limits:
-            memory: "512Mi"
+            memory: "1024Mi"
             cpu: "500m"
         ports:
         - containerPort: 27017
