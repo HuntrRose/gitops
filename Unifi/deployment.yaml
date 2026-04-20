@@ -82,10 +82,10 @@ spec:
         image: lscr.io/linuxserver/unifi-network-application:latest
         resources:
           requests:
-            memory: "256Mi"
+            memory: "1024Mi"
             cpu: "250m"
           limits:
-            memory: "512Mi"
+            memory: "1024Mi"
             cpu: "500m"
         env:
         - name: MONGO_HOST
