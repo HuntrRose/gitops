@@ -1,8 +1,8 @@
-apiVersion: storage.k8s.io/v1
-kind: persistentVolumeClaim
+apiVersion: core/v1
+kind: PersistentVolumeClaim
 metadata:
   name: unifidb-storage
-  namespace: unifi
+  namespace: default
 spec:
   accessModes:
     - ReadWriteMany
@@ -11,8 +11,8 @@ spec:
       storage: 1Gi
   storageClassName: nfs-server
 ---
-apiVersion: storage.k8s.io/v1
-kind: persistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: unifi-storage
   namespace: unifi
@@ -21,5 +21,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 100Mb
+      storage: 1Gi 
   storageClassName: nfs-server

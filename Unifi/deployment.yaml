@@ -42,6 +42,9 @@ spec:
         - name: MONGO_AUTHSOURCE
           value: admin
         resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
           limits:
             memory: "512Mi"
             cpu: "500m"
@@ -73,6 +76,13 @@ spec:
       containers:
       - name: unifi
         image: lscr.io/linuxserver/unifi-network-application:latest
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
         env:
         - name: MONGO_HOST
           value: unifi-db
