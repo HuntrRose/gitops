@@ -5,12 +5,10 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  sources:
-              
+  sources:    
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       path: Unifi
-
   destination:
     server: https://kubernetes.default.svc
     namespace: unifi
