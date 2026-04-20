@@ -130,14 +130,14 @@ spec:
           runAsGroup: 999
           
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: unifi
   namespace: unifi
 spec:
   selector:
-    app: unifi
+    name: unifi
   type: LoadBalancer
   ports:
     - name: tcp-8080
