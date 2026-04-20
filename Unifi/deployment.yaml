@@ -137,7 +137,7 @@ metadata:
   namespace: unifi
 spec:
   selector:
-    name: unifi
+    app: unifi
   type: LoadBalancer
   ports:
     - name: tcp-8080
