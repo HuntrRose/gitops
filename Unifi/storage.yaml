@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: persistentVolumeClaim
+metadata:
+  name: unifidb-storage
+  namespace: unifi
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-server
+  ---
+  apiVersion: v1
+kind: persistentVolumeClaim
+metadata:
+  name: unifi-storage
+  namespace: unifi
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Mb
+  storageClassName: nfs-server

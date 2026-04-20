@@ -26,8 +26,8 @@ metadata:
 spec:
   vaultAuthRef: nfs-csi-test-auth
   type: kv-v2
-  mount: k8s
-  path: test/unifiMongoCreds
+  mount: kv-v2
+  path: k8s/testSecret
   refreshAfter: 60s
   destination:
     name: nfs-csi-test-secret-creds
@@ -45,7 +45,7 @@ spec:
   method: kubernetes
   mount: kubernetes
   kubernetes:
-    role: test_role
+    role: test
     serviceAccount: default
     #tokenExpirationSeconds: 600
     audiences: 
