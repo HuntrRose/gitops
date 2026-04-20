@@ -20,22 +20,22 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
-              name: unifi-db-secret
+              name: unifi-mongo-creds
               key: username
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: unifi-db-secret
+              name: unifi-mongo-creds
               key: password
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
-              name: unifi-db-secret
+              name: unifi-mongo-creds
               key: username
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:
-              name: unifi-db-secret
+              name: unifi-mongo-creds
               key: password
         - name: MONGO_DB
           value: unifi
@@ -91,12 +91,12 @@ spec:
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
-              name: unifi-db-secret
+              name: unifi-mongo-creds
               key: username
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:
-              name: unifi-db-secret
+              name: unifi-mongo-creds
               key: password
         - name: MONGO_DB
           value: unifi
