@@ -56,7 +56,7 @@ spec:
         securityContext:
           runAsUser: 999
           runAsGroup: 999
-          fsGroup: 999
+          #fsGroup: 999
       volumes:
       - name: unifi-db-data
         persistentVolumeClaim:
@@ -128,7 +128,7 @@ spec:
       securityContext:
           runAsUser: 999
           runAsGroup: 999
-          fsGroup: 999
+          
 ---
 kind: Service
 apiVersion: v1
