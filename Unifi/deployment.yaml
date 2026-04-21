@@ -64,8 +64,8 @@ spec:
         - name: unifi-db-data
           mountPath: /data/db
         securityContext:
-          runAsUser: 999
-          runAsGroup: 999
+          runAsUser: 0
+          runAsGroup: 0
           #fsGroup: 999
       volumes:
       - name: unifi-db-data
@@ -118,10 +118,10 @@ spec:
           value: unifi
         - name: TZ
           value: "Etc/UTC"
-        - name: PUID
-          value: "999"
-        - name: PGID
-          value: "999"
+        #- name: PUID
+        #  value: "999"
+        #- name: PGID
+        #  value: "999"
         ports:
         - containerPort: 8080
         - containerPort: 3478
@@ -144,8 +144,8 @@ spec:
         persistentVolumeClaim:
           claimName: unifi-storage
       securityContext:
-          runAsUser: 999
-          runAsGroup: 999
+          runAsUser: 0
+          runAsGroup: 0
           
 ---
 apiVersion: v1
