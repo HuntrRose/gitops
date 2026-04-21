@@ -99,7 +99,7 @@ spec:
             cpu: "500m"
         env:
         - name: MONGO_HOST
-          value: unifi-db
+          value: unifi-db.unifi.svc.cluster.local
         - name: MONGO_PORT
           value: "27017"
         - name: MONGO_USER
@@ -114,6 +114,14 @@ spec:
               key: password
         - name: MONGO_DB
           value: unifi
+        - name: MONGO_AUTHSOURCE
+          value: unifi
+        - name: TZ
+          value: "Etc/UTC"
+        - name: PUID
+          value: "999"
+        - name: PGID
+          value: "999"
         ports:
         - containerPort: 8080
         - containerPort: 3478
