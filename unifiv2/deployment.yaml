@@ -44,7 +44,7 @@ spec:
         - name: id-hub
           containerPort: 9543
           protocol: TCP
-        - name: mobile-speedtest
+        - name: mobile-spdtest
           containerPort: 6789
           protocol: TCP
         - name: communication
@@ -62,7 +62,7 @@ spec:
         - name: discovery
           containerPort: 10003
           protocol: UDP
-        - name: site-supervisor
+        - name: site-supervisr
           containerPort: 11084
           protocol: TCP
         - name: aqmps
