@@ -55,6 +55,13 @@ spec:
           timeoutSeconds: 5
           successThreshold: 1
           failureThreshold: 3
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "250m"
+          limits:
+            memory: "2048Mi"
+            cpu: "500m"
       volumes:
       - name: unifi-os-server-data
         persistentVolumeClaim:
