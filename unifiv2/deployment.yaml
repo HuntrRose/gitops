@@ -68,13 +68,13 @@ spec:
         - name: aqmps
           containerPort: 5671
           protocol: TCP
-        - name: hotspot-redirect-0
+        - name: hspot-redir-0
           containerPort: 8880
           protocol: TCP
-        - name: hotspot-redirect-1
+        - name: hspot-redir-1
           containerPort: 8881
           protocol: TCP
-        - name: hotspot-redirect-2
+        - name: hspot-redir-2
           containerPort: 8882
           protocol: TCP
         volumeMounts:
