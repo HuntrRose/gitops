@@ -32,8 +32,8 @@ spec:
         env:
         - name: UOS_SYSTEM_IP
           value: "unifi.huntrrose.local"
-        #securityContext:
-        #  privileged: true
+        securityContext:
+          privileged: true
         ports:
         - name: webui
           containerPort: 443
