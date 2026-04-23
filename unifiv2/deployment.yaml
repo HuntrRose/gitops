@@ -31,7 +31,7 @@ spec:
         image: ghcr.io/lemker/unifi-os-server:latest
         env:
         - name: UOS_SYSTEM_IP
-          value: "unifi.huntrrose.local"
+          value: "10.50.0.153"
         securityContext:
           privileged: true
         ports:
