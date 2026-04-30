@@ -9,14 +9,12 @@ securityContext:
       - NET_ADMIN
       - NET_RAW
       - IPC_LOCK
-      - SYS_MODULE
       - SYS_ADMIN
       - SYS_RESOURCE
       - DAC_OVERRIDE
       - FOWNER
       - SETGID
       - SETUID
-      - SYSLOG
     cleanCiliumState:
       - NET_ADMIN
       - SYS_ADMIN
@@ -30,5 +28,5 @@ k8sServicePort: 7445
 l2annoucement:
   enabled: true
 k8sClientRateLimit:
-  qps: {QPS}
-  burst: {BURST}  
+  qps: 20
+  burst: 200  
