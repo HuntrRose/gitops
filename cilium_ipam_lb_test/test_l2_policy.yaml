@@ -10,6 +10,7 @@ spec:
     matchExpressions:
       - key: node-role.kubernetes.io/control-plane
         operator: DoesNotExist
-  interfaces:
-    - ^enx00155d00024[a-f0-9]+
+  #interfaces:
+  #  - ^enx00155d00024[a-f0-9]+
   loadBalancerIPs: true
+  externalIPs: true

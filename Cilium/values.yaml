@@ -1,6 +1,7 @@
 ipam:
   mode: "kubernetes"
 kubeProxyReplacement: "true"
+kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
 securityContext:
   capabilities:
     ciliumAgent:
@@ -25,8 +26,15 @@ cgroup:
   hostRoot: /sys/fs/cgroup
 k8sServiceHost: localhost
 k8sServicePort: 7445
-l2annoucement:
-  enabled: true
+l2announcement:
+  enabled: "true"
+l2NeighDiscovery:
+  enabled: "true"
 k8sClientRateLimit:
   qps: 20
-  burst: 200  
+  burst: 200
+hubble:
+  relay:
+    enabled: "true"
+  ui:
+    enabled: "true"
