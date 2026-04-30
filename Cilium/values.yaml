@@ -27,14 +27,12 @@ cgroup:
 k8sServiceHost: localhost
 k8sServicePort: 7445
 l2announcement:
-  enabled: "true"
-l2NeighDiscovery:
-  enabled: "true"
+  enabled: true
 k8sClientRateLimit:
   qps: 20
   burst: 200
 hubble:
   relay:
-    enabled: "true"
+    enabled: true
   ui:
-    enabled: "true"
+    enabled: true
