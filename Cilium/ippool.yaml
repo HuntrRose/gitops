@@ -1,0 +1,8 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: home-lb-pool
+spec:
+  blocks:
+  - start: "10.50.0.150"
+    stop: "10.50.0.250"

@@ -1,0 +1,12 @@
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: home-l2announce
+spec:
+  nodeSelector:
+    matchExpressions:
+    - key: node.kubernetes.io/control-plane
+      operator: DoesNotExist
+  interfaces:
+  - ^eth[0-9]+
+  loadBalancerIPs: true
