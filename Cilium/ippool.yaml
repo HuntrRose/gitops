@@ -5,4 +5,7 @@ metadata:
 spec:
   blocks:
   - start: "10.50.0.150"
-    stop: "10.50.0.250"
+    stop: "10.50.0.200"
+  serviceSelector:
+    matchExpressions:
+      - {key: env, operator: In, values: [home, internal]}

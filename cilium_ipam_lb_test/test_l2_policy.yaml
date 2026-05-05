@@ -3,9 +3,9 @@ kind: CiliumL2AnnouncementPolicy
 metadata:
   name: test-policy
 spec:
-  serviceSelector:
-    matchExpressions:
-      - {key: env, operator: In, values: [test, experiment]}
+  #serviceSelector:
+  #  matchExpressions:
+  #    - {key: env, operator: In, values: [test, experiment]}
   nodeSelector:
     matchExpressions:
       - key: node-role.kubernetes.io/control-plane
@@ -13,4 +13,4 @@ spec:
   #interfaces:
   #  - ^enx00155d00024[a-f0-9]+
   loadBalancerIPs: true
-  externalIPs: true
+  #externalIPs: true

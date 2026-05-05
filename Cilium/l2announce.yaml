@@ -7,6 +7,6 @@ spec:
     matchExpressions:
     - key: node.kubernetes.io/control-plane
       operator: DoesNotExist
-  interfaces:
-  - ^eth[0-9]+
+  #interfaces:
+  #- ^eth[0-9]+
   loadBalancerIPs: true

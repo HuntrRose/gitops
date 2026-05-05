@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.cilium.io
+      chart: cilium
+      targetRevision: 1.19.3
+      helm:
+        valueFiles:
+          - $values/Cilium/values.yaml
+          
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      ref: values
+    
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      path: Cilium
+      
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

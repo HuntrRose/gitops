@@ -2329,7 +2329,7 @@ server:
     # -- Server service labels
     labels: {}
     # -- Server service type
-    type: ClusterIP
+    type: LoadBalancer
     # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
     nodePortHttp: 30080
     # -- Server service https port for NodePort service type (only if `server.service.type` is set to "NodePort")
@@ -2348,7 +2348,7 @@ server:
     # -- The class of the load balancer implementation
     loadBalancerClass: ""
     # -- LoadBalancer will get created with the IP specified in this field
-    loadBalancerIP: ""
+    loadBalancerIP: "10.50.0.150"
     # -- Source IP ranges to allow access to service from
     ## EKS Ref: https://repost.aws/knowledge-center/eks-cidr-ip-address-loadbalancer
     ## GKE Ref: https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview#limit-connectivity-ext-lb
