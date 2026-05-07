@@ -1,0 +1,14 @@
+service:
+  type: LoadBalancer
+  labels: 
+    env: home
+serviceMonitor:
+  enabled: false
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 80m
+    memory: 64Mi

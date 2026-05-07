@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stirling-pdf
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://stirling-tools.github.io
+      chart: Stirling-PDF-chart
+      targetRevision: 3.1.0
+      helm:
+        valueFiles:
+          - $values/Stirling/values.yaml
+          
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stirling-pdf
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
