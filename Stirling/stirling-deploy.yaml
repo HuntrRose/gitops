@@ -18,13 +18,31 @@ spec:
           image: stirlingtools/stirling-pdf:latest
           ports:
             - containerPort: 8080
+              protocol: TCP
           resources:
             limits:
               memory: "1024Mi"
               cpu: "1"
             requests:
               memory: "128Mi"
-              cpu: "0.5"
+              cpu: "250m"
+          env:
+            - name: SECURITY_ENABLELOGIN
+              value: "false"
+            - name: SECURITY_ENABLEUSERCREATION
+              value: "false"
+            - name: SECURITY_ENABLEANONYMOUSACCESS
+              value: "true"
+            - name: SECURITY_ENABLELDAP
+              value: "false"
+            - name: SECURITY_ENABLEOIDC
+              value: "false"
+            - name: SECURITY_ENABLESAML
+              value: "false"
+            - name: SECURITY_ENABLEJWT
+              value: "false"
+            - name: SECURITY_APIKEY
+              value: "false"
           volumeMounts:
             - name: stirling-pvc
               mountPath: /usr/share/tessdata
