@@ -1,21 +1,21 @@
-deployment:
-  extraVolumes: 
-    - name: stirling-pvc
-      persistentVolumeClaim:
-        claimName: stirling-pvc
-  extraVolumeMounts:
-    - name: stirling-pvc
-      mountPath: /usr/share/tessdata
-      subPath: tessdata
-    - name: stirling-pvc
-      mountPath: /configs
-      subPath: configs
-    - name: stirling-pvc
-      mountPath: /logs
-      subPath: logs
-    - name: stirling-pvc
-      mountPath: /pipeline
-      subPath: pipeline 
+# deployment:
+#   extraVolumes: 
+#     - name: stirling-pvc
+#       persistentVolumeClaim:
+#         claimName: stirling-pvc
+#   extraVolumeMounts:
+#     - name: stirling-pvc
+#       mountPath: /usr/share/tessdata
+#       subPath: tessdata
+#     - name: stirling-pvc
+#       mountPath: /configs
+#       subPath: configs
+#     - name: stirling-pvc
+#       mountPath: /logs
+#       subPath: logs
+#     - name: stirling-pvc
+#       mountPath: /pipeline
+#       subPath: pipeline 
 
 service:
   type: LoadBalancer
@@ -28,6 +28,14 @@ resources:
   limits:
     cpu: 100m
     memory: 128Mi
+
   requests:
     cpu: 80m
     memory: 64Mi
+
+persistence:
+  enabled: true
+  accessModes:
+    - ReadWriteMany
+  storageClass: nfs-server
+  size: 10Gi
