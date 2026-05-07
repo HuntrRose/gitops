@@ -39,3 +39,5 @@ persistence:
     - ReadWriteMany
   storageClass: nfs-server
   size: 10Gi
+  path: /tmp
+  
