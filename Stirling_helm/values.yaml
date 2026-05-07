@@ -1,3 +1,22 @@
+deployment:
+  extraVolumes: 
+    - name: stirling-pvc
+      persistentVolumeClaim:
+        claimName: stirling-pvc
+  extraVolumeMounts:
+    - name: stirling-pvc
+      mountPath: /usr/share/tessdata
+      subPath: tessdata
+    - name: stirling-pvc
+      mountPath: /configs
+      subPath: configs
+    - name: stirling-pvc
+      mountPath: /logs
+      subPath: logs
+    - name: stirling-pvc
+      mountPath: /pipeline
+      subPath: pipeline 
+
 service:
   type: LoadBalancer
   labels: 
