@@ -6,19 +6,19 @@ metadata:
 spec:
   project: default
   sources:
-    # - repoURL: https://stirling-tools.github.io/Stirling-PDF-chart
-    #   chart: stirling-pdf-chart
-    #   targetRevision: 3.1.0
-    #   helm:
-    #     valueFiles:
-    #       - $values/Stirling/values.yaml
+    - repoURL: https://stirling-tools.github.io/Stirling-PDF-chart
+      chart: stirling-pdf-chart
+      targetRevision: 3.1.0
+      helm:
+        valueFiles:
+          - $values/Stirling_helm/values.yaml
           
-    # - repoURL: https://github.com/huntrrose/gitops.git
-    #   targetRevision: HEAD
-    #   ref: values
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
-      path: Stirling
+      ref: values
+    # - repoURL: https://github.com/huntrrose/gitops.git
+    #   targetRevision: HEAD
+    #   path: Stirling
       
   destination:
     server: https://kubernetes.default.svc
