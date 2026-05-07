@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stirling-deployment
+  namespace: stirling-pdf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stirling
+  template:
+    metadata:
+      labels:
+        app: stirling
+    spec:
+      containers:
+        - name: stirling-pdf
+          image: ghcr.io/robertstirling/stirling-pdf:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
+            requests:
+              memory: "128Mi"
+              cpu: "0.5"
+          volumeMounts:
+            - name: stirling-pvc
+              mountPath: /usr/share/tessdata
+              subPath: tessdata
+            - name: stirling-pvc
+              mountPath: /configs
+              subPath: configs
+            - name: stirling-pvc
+              mountPath: /logs
+              subPath: logs
+            - name: stirling-pvc
+              mountPath: /pipeline
+              subPath: pipeline
+      volumes:
+        - name: stirling-pvc
+          persistentVolumeClaim:
+            claimName: stirling-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stirling-service
+  namespace: stirling-pdf
+  labels:
+    env: internal
+spec:
+  type: LoadBalancer
+  selector:
+    app: stirling
+  ports:
+    - protocol: TCP
+      port: 80  
+      targetPort: 8080
