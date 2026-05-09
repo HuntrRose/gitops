@@ -38,4 +38,6 @@ hubble:
     enabled: true
 gatewayAPI:
   enabled: true
-  
+operator:
+  role:
+    enabled:true
