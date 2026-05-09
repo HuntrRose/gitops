@@ -1,9 +1,6 @@
 common:
   service:
-      type: LoadBalancer
-      metadata:
-        labels: 
-          env: home
+      enabled: false
   persistence:
     enabled: true
     
