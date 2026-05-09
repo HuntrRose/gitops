@@ -42,8 +42,8 @@ operator:
   replicas: 1
   role:
     enabled:true
-envoyConfig:
-  enabled: true
-ingressController:
-  enabled: true
-  enforceHttps: false
+# envoyConfig:
+#   enabled: true
+# ingressController:
+#   enabled: true
+#   enforceHttps: false
