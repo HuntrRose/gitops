@@ -38,12 +38,14 @@ hubble:
     enabled: true
 gatewayAPI:
   enabled: true
+  hostNetwork:
+    enabled: true
 operator:
   replicas: 1
   role:
     enabled: true
 # envoyConfig:
 #   enabled: true
-# ingressController:
-#   enabled: true
+ingressController:
+  enabled: false
 #   enforceHttps: false
