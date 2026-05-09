@@ -41,3 +41,10 @@ gatewayAPI:
 operator:
   role:
     enabled:true
+envoyConfig:
+  enabled: true
+ingressController:
+  enabled: true
+  enforceHttps: false
+operator:
+  replicas: 1
