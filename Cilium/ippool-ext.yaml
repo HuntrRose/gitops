@@ -1,0 +1,11 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: home-lb-pool-ext
+spec:
+  blocks:
+  - start: "10.50.0.201"
+    stop: "10.50.0.210"
+  serviceSelector:
+    matchExpressions:
+      - {key: env, operator: In, values: [gateway, external]}
