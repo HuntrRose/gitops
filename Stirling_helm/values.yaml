@@ -35,20 +35,7 @@ resources:
 
 persistence:
   enabled: true
-  volumes:
-    - name: trainingdata
-      contrainerMount: /usr/share/tessdata
-      pvc: stirling-pvc
-      subPath: tessdata
-    - name: configs 
-      contrainerMount: /configs
-      pvc: stirling-pvc
-      subPath: configs
-    - name: logs
-      contrainerMount: /logs
-      pvc: stirling-pvc
-      subPath: logs
-    - name: pipeline
-      contrainerMount: /pipeline
-      pvc: stirling-pvc
-      subPath: pipeline 
+  accessMode: ReadWriteMany
+  size: 1Gi
+  storageClass: nfs-server
+  path: /tmp

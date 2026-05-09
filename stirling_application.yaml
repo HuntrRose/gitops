@@ -6,19 +6,19 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://stirling-tools.github.io/Stirling-PDF-chart
-      chart: stirling-pdf-chart
-      targetRevision: 3.1.0
+    - repoURL: https://rubxkube.github.io/charts/
+      chart: stirling-pdf
+      targetRevision: 0.0.9
       helm:
         valueFiles:
-          - $values/Stirling_helm/values.yaml
+          - $values/Stirling_helm/rubx-my-values.yaml
           
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/huntrrose/gitops.git
-      targetRevision: HEAD
-      path: Stirling_helm  
+    # - repoURL: https://github.com/huntrrose/gitops.git
+    #   targetRevision: HEAD
+    #   path: Stirling_helm  
     # - repoURL: https://github.com/huntrrose/gitops.git
     #   targetRevision: HEAD
     #   path: Stirling
