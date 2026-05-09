@@ -16,9 +16,9 @@ spec:
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       ref: values
-    # - repoURL: https://github.com/huntrrose/gitops.git
-    #   targetRevision: HEAD
-    #   path: Stirling_helm  
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      path: Stirling_helm  
     # - repoURL: https://github.com/huntrrose/gitops.git
     #   targetRevision: HEAD
     #   path: Stirling
