@@ -3,6 +3,9 @@ kind: Gateway
 metadata:
   name: home-gateway
   namespace: cilium-gateway
+  labels:
+    app: home-gateway
+    env: external
 spec:
   gatewayClassName: cilium-gateway
   listeners:
