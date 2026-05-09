@@ -37,6 +37,6 @@ spec:
         type: PathPrefix
         value: /
     defaultBackendRef:
-      name: stirling-pdf
+    - name: stirling-pdf
       namespace: stirling-pdf
       port: 8080
