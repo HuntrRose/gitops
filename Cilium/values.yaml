@@ -39,7 +39,7 @@ hubble:
 gatewayAPI:
   enabled: true
   hostNetwork:
-    enabled: true
+    enabled: false
 operator:
   replicas: 1
   role:
