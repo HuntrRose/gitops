@@ -1,18 +1,21 @@
-persistence:
-  enabled: true
-  volumes:
-    - name: "trainingdata"
-      storageClassName: "nfs-server"
-      size: "10Gi"
-      pvcClaim: ""
-      containerMount: "/usr/share/tessdata"
-    - name: "config"
-      storageClassName: "nfs-server"
-      size: "1Gi"
-      pvcClaim: ""
-      containerMount: "/configs"
-    - name: "log"
-      storageClassName: "nfs-server "
-      size: "1Gi"
-      pvcClaim: ""
-      containerMount: "/logs"
+common:
+  persistence:
+    enabled: true
+    volumes:
+      - name: "trainingdata"
+        storageClassName: "nfs-server"
+        size: "10Gi"
+        pvcClaim: ""
+        containerMount: "/usr/share/tessdata"
+      - name: "config"
+        storageClassName: "nfs-server"
+        size: "1Gi"
+        pvcClaim: ""
+        containerMount: "/configs"
+      - name: "log"
+        storageClassName: "nfs-server "
+        size: "1Gi"
+        pvcClaim: ""
+        containerMount: "/logs"
+  ingress:
+    enabled: false

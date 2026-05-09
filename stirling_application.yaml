@@ -32,5 +32,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  ingress:
-    enabled: false
+  
