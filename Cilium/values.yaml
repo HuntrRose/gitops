@@ -41,7 +41,7 @@ gatewayAPI:
 operator:
   replicas: 1
   role:
-    enabled:true
+    enabled: true
 # envoyConfig:
 #   enabled: true
 # ingressController:
