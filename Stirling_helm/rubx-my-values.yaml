@@ -1,6 +1,10 @@
 common:
   persistence:
     enabled: true
+    service:
+      type: LoadBalancer
+      labels: 
+        env: home
     volumes:
       - name: "trainingdata"
         storageClassName: "nfs-server"
