@@ -39,6 +39,7 @@ hubble:
 gatewayAPI:
   enabled: true
 operator:
+  replicas: 1
   role:
     enabled:true
 envoyConfig:
@@ -46,5 +47,3 @@ envoyConfig:
 ingressController:
   enabled: true
   enforceHttps: false
-operator:
-  replicas: 1
