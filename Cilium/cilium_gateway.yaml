@@ -13,7 +13,7 @@ metadata:
     app: home-gateway
     env: external
 spec:
-  gatewayClassName: cilium-gateway
+  gatewayClassName: cilium
   listeners:
   - name: http
     protocol: HTTP
