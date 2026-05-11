@@ -9,15 +9,18 @@ kind: Gateway
 metadata:
   name: home-gateway
   namespace: cilium-gateway
-  labels:
-    app: home-gateway
-    env: gateway
+  # labels:
+  #   app: home-gateway
+  #   env: gateway
 spec:
   gatewayClassName: cilium
   listeners:
   - name: http
     protocol: HTTP
     port: 80
+    allowedRoutes:
+      namespaces:
+        from: All
 # ---
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: HTTPRoute
