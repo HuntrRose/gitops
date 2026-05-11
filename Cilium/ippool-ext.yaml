@@ -6,6 +6,6 @@ spec:
   blocks:
   - start: "10.50.0.201"
     stop: "10.50.0.210"
-  serviceSelector:
-    matchExpressions:
-      - {key: env, operator: In, values: [gateway, external]}
+  # serviceSelector:
+  #   matchExpressions:
+  #     - {key: env, operator: In, values: [gateway, external]}
