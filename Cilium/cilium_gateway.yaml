@@ -11,7 +11,7 @@ metadata:
   namespace: cilium-gateway
   labels:
     app: home-gateway
-    env: external
+    env: gateway
 spec:
   gatewayClassName: cilium
   listeners:
