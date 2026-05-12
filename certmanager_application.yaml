@@ -9,17 +9,7 @@ spec:
     - repoURL: oci://quay.io/jetstack/charts/cert-manager
       targetRevision: 1.20.2
       path: .
-      helm:
-        valueFiles:
-          - $values/Certmanager/values.yaml
-          
-    - repoURL: https://github.com/huntrrose/gitops.git
-      targetRevision: HEAD
-      ref: values
-    
-    - repoURL: https://github.com/huntrrose/gitops.git
-      targetRevision: HEAD
-      path: Certmanager
+      
       
   destination:
     server: https://kubernetes.default.svc
