@@ -47,3 +47,18 @@ spec:
       port: 80
       targetPort: 80
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service2
+  labels:
+    env: external
+spec:
+  selector:
+    app: test-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

@@ -26,7 +26,9 @@ cgroup:
   hostRoot: /sys/fs/cgroup
 k8sServiceHost: localhost
 k8sServicePort: 7445
-l2announcement:
+l2announcements:
+  enabled: true
+externalIPs:
   enabled: true
 k8sClientRateLimit:
   qps: 20
@@ -38,8 +40,8 @@ hubble:
     enabled: true
 gatewayAPI:
   enabled: true
-  hostNetwork:
-    enabled: false
+  enableAppProtocol: true
+  enableAlpn: true
 operator:
   replicas: 1
 # envoyConfig:
