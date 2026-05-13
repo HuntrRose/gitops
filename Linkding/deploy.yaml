@@ -3,6 +3,19 @@ kind: Namespace
 metadata:
   name: linkding
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: linkding-pvc
+  namespace: linkding
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-server
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,14 +29,44 @@ spec:
   selector:
     matchLabels:
       app: linkding
-    container:
+  template:
+    metadata:
+      labels:
+        app: linkding
+    spec:
+      containers:
       - name: linkding
         image: sissbruecker/linkding:latest
         ports:
           - containerPort: 8000
-        env:
-          - name: LINKDING__DATABASE__CONNECTION_STRING
-            valueFrom:
-              secretKeyRef:
-                name: linkding-secrets
-                key: connection-string
+        volumeMounts:
+          - name: linkding-data
+            mountPath: /etc/linkding/data
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m" 
+      volumes:
+        - name: linkding-data
+          persistentVolumeClaim:
+            claimName: linkding-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: linkding
+  namespace: linkding
+  labels:
+    app: linkding
+    env: internal 
+spec: 
+  selector:
+    app: linkding
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer
