@@ -36,12 +36,21 @@ spec:
     spec:
       containers:
       - name: linkding
-        image: sissbruecker/linkding:latest
+        image: ghcr.io/sissbruecker/linkding:1.45.0
         ports:
-          - containerPort: 8000
+          - containerPort: 9090
         volumeMounts:
           - name: linkding-data
             mountPath: /etc/linkding/data
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: RuntimeDefault
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
         resources:
           limits:
             memory: "512Mi"
@@ -68,5 +77,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8000
+      targetPort: 9090
   type: LoadBalancer
