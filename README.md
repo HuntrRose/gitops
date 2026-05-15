@@ -9,5 +9,8 @@ In the long run I'll move off Hyper-V and onto baremetal. What will be decided b
 ## Plan
 
 1. remove devops-tools namespace contents
-2. setup argoCD in devops-tools
-3. Implement Unifi Network Server through Argo
+1. setup argoCD in devops-tools
+1. Unifi put on hold for now. Doing metrics and monitoring first.
+1.
+##
+

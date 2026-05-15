@@ -35,7 +35,7 @@ grafana:
     port: 80
 
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: aws-alb
     annotations:
       kubernetes.io/ingress.class: aws-alb
@@ -87,7 +87,7 @@ grafana:
 
   persistence:
     enabled: true
-    storageClassName: gp3
+    storageClassName: nfs-server
     accessModes:
       - ReadWriteOnce
     size: 5Gi
@@ -281,7 +281,7 @@ loki:
     replicas: 1
     persistence:
       enabled: true
-      storageClass: gp3
+      storageClass: nfs-server
       accessModes:
         - ReadWriteOnce
       size: 20Gi
@@ -336,7 +336,7 @@ tempo:
 
     persistence:
       enabled: true
-      storageClass: gp3
+      storageClass: nfs-server
       size: 10Gi
       accessModes:
         - ReadWriteOnce
