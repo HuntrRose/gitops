@@ -21,6 +21,8 @@ prometheus:
 grafana:
   service:
     type: LoadBalancer
+    labels:
+      env: internal
   persistence:
     enabled: true
     storageClassName: nfs-server
