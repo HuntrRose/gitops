@@ -19,6 +19,20 @@ prometheus:
             requests:
               storage: 30Gi
 
+prometheus-node-exporter:
+  podSecurityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+
 kubeEtcd:
   endpoints: 
     - 10.50.0.20
