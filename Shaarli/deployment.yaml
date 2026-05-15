@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: linkding
+  name: shaarli
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: linkding-pvc
-  namespace: linkding
+  name: shaarli-pvc
+  namespace: shaarli
 spec:
   accessModes:
     - ReadWriteMany
@@ -19,29 +19,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: linkding
-  namespace: linkding
+  name: shaarli
+  namespace: shaarli
   labels:
-    app: linkding
+    app: shaarli
     env: internal
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: linkding
+      app: shaarli
   template:
     metadata:
       labels:
-        app: linkding
+        app: shaarli
     spec:
       containers:
-      - name: linkding
-        image: ghcr.io/sissbruecker/linkding:1.40.0
-        ports:
-          - containerPort: 9090
-        volumeMounts:
-          - name: linkding-data
-            mountPath: /etc/linkding/data
+      - name: shaarli
+        image:  ghcr.io/shaarli/shaarli:latest
         # securityContext:
         #   allowPrivilegeEscalation: false
         #   capabilities:
@@ -57,24 +52,33 @@ spec:
             cpu: "500m"
           requests:
             memory: "256Mi"
-            cpu: "250m" 
+            cpu: "250m"
+        ports:
+          - containerPort: 80
+        volumeMounts:
+          - name: shaarli-data
+            mountPath: /var/www/shaarli/data
+            subPath: shaarli-data
+          - name: shaarli-data
+            mountPath: /var/www/shaarli/cache
+            subPath: shaarli-cache
       volumes:
-        - name: linkding-data
+        - name: shaarli-data
           persistentVolumeClaim:
-            claimName: linkding-pvc
+            claimName: shaarli-pvc
 ---
 apiVersion: v1
 kind: Service
-metadata:
-  name: linkding
-  namespace: linkding
+metadata: 
+  name: shaarli
+  namespace: shaarli
   labels:
-    env: internal 
+    env: internal
 spec: 
   selector:
-    app: linkding
+    app: shaarli
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 9090
-  type: LoadBalancer
+      targetPort: 80
+  type: LoadBalancer  
