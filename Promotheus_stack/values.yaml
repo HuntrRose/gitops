@@ -18,3 +18,12 @@ prometheus:
           resources:
             requests:
               storage: 30Gi
+grafana:
+  service:
+    type: LoadBalancer
+  persistence:
+    enabled: true
+    storageClassName: nfs-server
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
