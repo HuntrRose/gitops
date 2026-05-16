@@ -35,3 +35,5 @@ Next is either Mealie or Tandoor recipe DB, or Grafana Alloy for consolidated lo
 Recipe database would use more of the tools I have installed, and bind it all together, while Alloy and Loki would add better monitoring capabilities.
 
 I also plan on setting up Jenkins to run IaC pipelines, container builds and other sideprojects as they come up.
+
+I also plan on replaceing Shaarli with linkWarden or something similiar, and finding an alternative to paid Obsidian.
