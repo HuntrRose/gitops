@@ -24,5 +24,14 @@ Current status is as follows:
 Currently we have the following installed and running:
 - CertManager
 - Stirling-PDF
--
+- Shaarli
+- HashiCorp Vault
+- Vault Secrets Operator
+- Cilium
+- Prometheus stack
 
+Next is either Mealie or Tandoor recipe DB, or Grafana Alloy for consolidated log and metrics gathering with Loki for storing logs.
+
+Recipe database would use more of the tools I have installed, and bind it all together, while Alloy and Loki would add better monitoring capabilities.
+
+I also plan on setting up Jenkins to run IaC pipelines, container builds and other sideprojects as they come up.
