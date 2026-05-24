@@ -1,0 +1,23 @@
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+persistence:
+  config:
+    enabled: true
+    storageClass: nfs-server
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 3000 
+  annotations:
+    app: homepage
+    env: internal
+
+securityContext:
+  allowPrivilegeEscalation: false
