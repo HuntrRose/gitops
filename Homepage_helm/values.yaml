@@ -1,2 +1,45 @@
 config:
-  allowedHosts: ""
+  allowedHosts: 
+    - homepage.huntrrose.local
+  settings:
+    title: Test Page
+  services:
+    - Graphana:
+        href: http://10.50.0.153
+  persistence:
+    config:
+      enabled: true
+      accessModes: ReadWriteOnce
+      size: 1Gi
+      storageClass: nfs-server
+
+route:
+  main:
+    enabled: true
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: HTTPRoute
+    parentRefs:
+      - name: gw-internal
+        namespace: gateway
+    hostnames:
+      - homepage.huntrrose.local
+    matches:
+      - path:
+          type: PathPrefix
+          value: /
+
+volumes:
+  - name: config
+    configMap:
+      name: homepage-config
+
+volumeMounts:
+  - name: config
+    mountPath: /app/config/settings.yaml
+    subPath: services.yaml
+# persistence:
+ 
+#   enabled: true
+#   accessModes: ReadWriteOnce
+#   size: 1Gi
+#   storageClass: nfs-server

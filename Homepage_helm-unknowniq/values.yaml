@@ -1,0 +1,55 @@
+route:
+  enabled: true
+  parentRefs:
+    - name: gw-internal
+      namespace: gateway
+      #sectionName: http
+  hostnames:
+    - homepage.huntrrose.local
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+env:
+  - name: HOMEPAGE_ALLOWED_HOSTS
+    value: "homepage.huntrrose.local"
+
+config:
+  services:
+    - Cluster:
+        - Homepage:
+            href: http://homepage.huntrrose.local
+            description: Application Dashboard
+            widget:
+              type: kubernetes
+              cluster: default
+              namespace: default
+  widgets:
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: "cluster"
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+#     - resources:
+#         backend: kubernetes
+#         expanded: true
+#         cpu: true
+#         memory: true
+  kubernetes:
+    gateway: true
+    traefik: false
+    ingress: false
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    storageClass: nfs-server

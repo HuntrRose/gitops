@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  namespace: homepage
+data:
+  services.yaml: | 
+    - Infrastructure:
+        - name: Grafana
+            href: http://10.50.0.153
+            description: Monitoring my cluster
+        - name: ArgoCD
+            href: http://10.50.0.150
+            description: Managing my cluster applications
+    - Applications:
+        - name: Stirling-PDF
+            href: http://10.50.0.151
+            description: PDF manipulation tool
+        - name: Shaarli
+            href: http://10.50.0.152
+            description: Self-hosted bookmarking tool
+        
