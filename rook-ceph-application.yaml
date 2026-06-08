@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rook-ceph
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://charts.rook.io/release
+      chart: rook-ceph
+      targetRevision: v1.20.0
+      helm:
+        valueFiles:
+          - $values/Ceph/my-rook-ceph.yaml
+    - repoURL: https://charts.rook.io/release
+      chart: rook-ceph-cluster
+      targetRevision: v1.20.0
+      helm:
+        valueFiles:
+          - $values/Ceph/my-rook-ceph-cluster.yaml
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      path: Ceph  
+    # - repoURL: https://github.com/huntrrose/gitops.git
+    #   targetRevision: HEAD
+    #   path: Stirling
+      
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: rook-ceph
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  
