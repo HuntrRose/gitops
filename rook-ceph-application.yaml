@@ -33,8 +33,9 @@ spec:
     namespace: rook-ceph
   syncPolicy:
     automated:
-      prune: true
+      prune: false
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
   
