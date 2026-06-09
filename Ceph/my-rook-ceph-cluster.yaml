@@ -2,3 +2,12 @@ monitoring:
   enabled: true
   createPrometheusRules: true
 
+cephBlockPools:
+  - name: ceph-blockpool
+    storageClass:
+      enabled: false
+
+cephFilesystems:
+  - name: ceph-filesystem
+    storageClass:
+      enabled: false
