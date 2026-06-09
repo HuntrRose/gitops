@@ -1,2 +1,2 @@
 monitoring:
-  enable: true
+  enabled: true

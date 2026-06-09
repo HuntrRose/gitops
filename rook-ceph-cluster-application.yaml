@@ -1,26 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rook-ceph
+  name: rook-ceph-cluster
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-2"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   sources:
     - repoURL: https://charts.rook.io/release
-      chart: rook-ceph
+      chart: rook-ceph-cluster
       targetRevision: v1.20.0
       helm:
         valueFiles:
-          - $values/Ceph/my-rook-ceph.yaml
+          - $values/Ceph/my-rook-ceph-cluster.yaml
     
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/huntrrose/gitops.git
-      targetRevision: HEAD
-      path: Ceph  
+    
     # - repoURL: https://github.com/huntrrose/gitops.git
     #   targetRevision: HEAD
     #   path: Stirling
