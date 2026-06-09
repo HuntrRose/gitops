@@ -2,12 +2,19 @@ monitoring:
   enabled: true
   createPrometheusRules: true
 
-cephBlockPools:
-  - name: ceph-blockpool
-    storageClass:
-      enabled: false
-
-cephFilesystems:
-  - name: ceph-filesystem
-    storageClass:
-      enabled: false
+cephClusterSpec:
+  storage:
+    useAllNodes: false
+    useAllDevices: false
+    config:
+      databaseSizeMB: "1024"
+    nodes:
+      - name: "talos-worker01"
+        devices:
+          - name: "sdb"
+      - name: "talos-worker02"
+        devices:
+          - name: "sdb"
+      - name: "talos-worker03"
+        devices:
+          - name: "sdb"
