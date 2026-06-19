@@ -91,7 +91,7 @@ spec:
       sectionName: shaarli-http
   rules:
     - matches:
-        - path:
+      - path:
             type: PathPrefix
             value: /
       defaultBackendRefs:
