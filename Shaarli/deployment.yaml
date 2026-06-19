@@ -94,7 +94,7 @@ spec:
       - path:
             type: PathPrefix
             value: /
-      defaultBackendRefs:
+      backendRefs:
         - name: shaarli
           namespace: shaarli
           port: 80
