@@ -24,7 +24,7 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-    managedNamespaceMeta:
+    managedNamespaceMetadata:
       labels:
         app.kubernetes.io/managed-by: argocd
         pod-security.kubernetes.io/enforce: privileged
