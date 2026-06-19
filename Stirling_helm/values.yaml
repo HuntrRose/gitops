@@ -36,6 +36,5 @@ resources:
 persistence:
   enabled: true
   accessMode: ReadWriteMany
-  size: 1Gi
-  storageClass: nfs-server
-  path: /tmp
+  # size: 1Gi
+  

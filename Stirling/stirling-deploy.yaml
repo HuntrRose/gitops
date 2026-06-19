@@ -66,10 +66,8 @@ kind: Service
 metadata:
   name: stirling-service
   namespace: stirling-pdf
-  labels:
-    env: internal
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: stirling
   ports:
