@@ -6,17 +6,17 @@ common:
     
     volumes:
       - name: "trainingdata"
-        storageClassName: "nfs-server"
+        storageClassName: longhorn
         size: "10Gi"
         pvcClaim: ""
         containerMount: "/usr/share/tessdata"
       - name: "config"
-        storageClassName: "nfs-server"
+        storageClassName: longhorn
         size: "1Gi"
         pvcClaim: ""
         containerMount: "/configs"
       - name: "log"
-        storageClassName: "nfs-server "
+        storageClassName: longhorn
         size: "1Gi"
         pvcClaim: ""
         containerMount: "/logs"

@@ -38,10 +38,10 @@ kubeEtcd:
     - 10.50.0.20
 
 grafana:
-  service:
-    type: LoadBalancer
-    labels:
-      env: internal
+  # service:
+  #   type: ClusterIP
+  #   labels:
+  #     env: internal
   persistence:
     enabled: true
     storageClassName: nfs-server
