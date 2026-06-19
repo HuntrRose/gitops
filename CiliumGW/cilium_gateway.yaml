@@ -16,6 +16,14 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - protocol: HTTP
+      port: 80
+      name: shaarli-http
+      hostname: shaarli.huntrrose.com
+      allowedRoutes:
+        namespaces:
+          from: shaarli
+
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
