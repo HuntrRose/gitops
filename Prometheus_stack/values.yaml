@@ -48,3 +48,5 @@ grafana:
     accessModes:
       - ReadWriteOnce
     size: 10Gi
+  adminUser: admin
+  adminPassword: TempPass123!
