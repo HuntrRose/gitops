@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: longhorn
+      repoURL: https://charts.longhorn.io/
+      targetRevision: v1.12.0 # Replace with the Longhorn version you'd like to install or upgrade to
+      helm:
+        valueFiles:
+          - $values/Longhorn/values.yaml # Path to your custom values file for Longhorn
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: longhorn-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    managedNamespaceMeta:
+      labels:
+        app.kubernetes.io/managed-by: argocd
+        pod-security.kubernetes.io/enforce: privileged
+      annotations:
+        argocd.argoproj.io/sync-wave: "-1"
+    

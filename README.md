@@ -37,3 +37,11 @@ Recipe database would use more of the tools I have installed, and bind it all to
 I also plan on setting up Jenkins to run IaC pipelines, container builds and other sideprojects as they come up.
 
 I also plan on replaceing Shaarli with linkWarden or something similiar, and finding an alternative to paid Obsidian.
+
+## Plan 3
+
+Due to problems getting Rook-Ceph up on minimal resources, cluster has been scratched again.
+Alternative is to implement SeaweedFS. More lightweight, FUSE Mount and S3 compatibility.
+Another option is Longhorn as a distributed in-cluster storage and MinIO on external server for S3 bucket in addition to existing NFS.
+
+As of writing, only Cilium and ArgoCD has been installed. Need to make a descision on the storage for much of the rest.
