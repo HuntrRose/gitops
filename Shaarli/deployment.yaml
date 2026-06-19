@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: shaarli
+  labels:
+    app: shaarli
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
