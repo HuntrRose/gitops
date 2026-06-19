@@ -22,7 +22,7 @@ spec:
       hostname: shaarli.huntrrose.com
       allowedRoutes:
         namespaces:
-          from: shaarli
+          from: All
 
 ---
 apiVersion: gateway.networking.k8s.io/v1
