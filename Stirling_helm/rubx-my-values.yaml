@@ -1,6 +1,11 @@
 common:
   service:
       enabled: false
+  variables:
+    nonSecret:
+      DOCKER_ENABLE_SECURITY: false
+      INSTALL_BOOK_AND_ADVANCED_HTML_OPS: false
+      LANGS: en_GB
   persistence:
     enabled: true
     
