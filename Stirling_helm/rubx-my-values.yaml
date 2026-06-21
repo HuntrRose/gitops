@@ -20,5 +20,10 @@ common:
         size: "1Gi"
         pvcClaim: ""
         containerMount: "/logs"
+      - name: "pdfdata"
+        storageClassName: longhorn
+        size: "1Gi"
+        pvcClaim: ""
+        containerMount: "/tmp"
   ingress:
     enabled: false
