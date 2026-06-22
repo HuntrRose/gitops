@@ -9,16 +9,8 @@ alertmanager:
             requests:
               storage: 2Gi
 prometheus:
-  storageSpec:
-    volumeClaimTemplate:
-      spec:
-        storageClassName: nfs-server
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 30Gi
   prometheusspec:
-    storage:
+    storageSpec:
       volumeClaimTemplate:
         spec:
           storageClassName: nfs-server
