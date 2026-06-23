@@ -1,6 +1,6 @@
 common:
   service:
-      enabled: false
+      enabled: true
   variables:
     nonSecret:
       DOCKER_ENABLE_SECURITY: false

@@ -1,5 +1,5 @@
 alertmanager:
-  alertmanagerspec:
+  alertmanagerSpec:
     storage:
       volumeClaimTemplate:
         spec:
@@ -9,7 +9,7 @@ alertmanager:
             requests:
               storage: 2Gi
 prometheus:
-  prometheusspec:
+  prometheusSpec:
     storageSpec:
       volumeClaimTemplate:
         spec:
