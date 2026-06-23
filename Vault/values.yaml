@@ -17,10 +17,7 @@ server:
     limits:
       cpu: 500m
       memory: 512Mi
-  route:
-    enabled: true
-    host: vault.huntrrose.local
-#  volumes:
+  
 #    - name: vault-data
 #      persistentVolumeClaim:
 #        claimName: vault-data-pvc
