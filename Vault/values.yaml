@@ -10,7 +10,16 @@ server:
     enabled: true
     size: 1Gi
     storageClass: nfs-server
-
+  resources:
+    requests:
+      cpu: 250m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  route:
+    enabled: true
+    host: vault.huntrrose.local
 #  volumes:
 #    - name: vault-data
 #      persistentVolumeClaim:
