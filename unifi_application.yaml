@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: stirling-pdf
+  name: unifios
   namespace: argocd
 spec:
   project: default
   sources:
-    - repoURL: https://chrissnell.github.io/unifi-os-kubernetes
-      chart: unifi-os/unifi-os-server
+    - repoURL: https://chrissnell.github.io/unifi-os-kubernetes/
+      chart: unifi-os-server
       targetRevision: 0.2.3
       helm:
         valueFiles:
@@ -27,3 +27,8 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+    managedNamespaceMetadata:
+      labels:
+        pod-security.kubernetes.io/enforce: privileged
+      
+        

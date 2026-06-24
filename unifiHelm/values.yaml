@@ -18,10 +18,9 @@ persistence:
     size: 10Gi
 
 service:
-  type: LoadBalancer
-  loadBalancerIP: "10.50.0.151"
-  labels:
-    env: internal
+  type: ClusterIP
+  #loadBalancerIP: "10.50.0.151"
+  
 
 unifiExporter:
   serviceMonitor:
