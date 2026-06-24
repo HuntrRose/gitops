@@ -1,0 +1,296 @@
+# Default values for the unifi-os-server chart.
+# UniFi OS Server is a monolithic appliance image that bundles MongoDB,
+# RabbitMQ, PostgreSQL, nginx, and the Java/Go services. It runs systemd as
+# PID 1 and requires a privileged container with cgroup access.
+
+image:
+  repository: ghcr.io/chrissnell/unifi-os-server
+  # If unset, Chart.appVersion is used.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+# Optional: pin the public hostname or IP UOS advertises to controllers and
+# devices. Maps to system.properties:system_ip.
+systemIp: ""
+
+# Optional: pin a stable UOS_UUID across reinstalls. Leave empty to let the
+# entrypoint generate one (it's persisted to the data PVC after first boot).
+uosUuid: ""
+
+# Optional Synology kernel/cgroup workarounds. Set to "synology" if running
+# on a Synology DSM host.
+hardwarePlatform: ""
+
+# Extra environment variables for the UOS container.
+extraEnv: {}
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 2Gi
+  limits:
+    cpu: "4"
+    memory: 6Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+priorityClassName: ""
+
+# Pod-level security: UOS runs systemd and bundled services as root; it
+# requires NET_ADMIN/NET_RAW and host cgroup access. Privileged mode is the
+# only reliable way to run it at present.
+podSecurityContext: {}
+securityContext:
+  privileged: true
+  capabilities:
+    add:
+      - NET_ADMIN
+      - NET_RAW
+
+# Data volumes. UOS state is split across several paths; we expose two PVCs
+# so the database can be sized, snapshotted, and restored independently of
+# everything else.
+persistence:
+  # Main UOS state (config, persistent, /data, /srv, unifi network app, logs,
+  # rabbitmq SSL).
+  data:
+    enabled: true
+    storageClass: ""
+    accessMode: ReadWriteOnce
+    size: 20Gi
+    # Use an existing PVC (skips PVC creation).
+    existingClaim: ""
+    annotations: {}
+    # If set, an explicit PV is created with this NFS mount and bound to the
+    # PVC. Useful when you don't have a CSI provisioner.
+    nfs: {}
+    #  server: 10.50.0.110
+    #  path: /volume1/NFS/unifi-os/data
+
+  # Bundled MongoDB datadir (/var/lib/mongodb). Separate so you can put it on
+  # faster storage and snapshot it on its own schedule.
+  mongo:
+    enabled: true
+    storageClass: ""
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    existingClaim: ""
+    annotations: {}
+    nfs: {}
+    #  server: 10.50.0.110
+    #  path: /volume1/NFS/unifi-os/mongo
+
+  # Optional dedicated PVC for the Network app's autobackup directory
+  # (/var/lib/unifi/data/backup). When enabled, this overlays the main data
+  # PVC so autobackups land on storage you can snapshot / replicate / scrub
+  # independently. Leave disabled to keep autobackups inside the data PVC.
+  backups:
+    enabled: false
+    storageClass: ""
+    accessMode: ReadWriteOnce
+    size: 20Gi
+    existingClaim: ""
+    annotations: {}
+    nfs: {}
+    #  server: 10.50.0.110
+    #  path: /volume1/NFS/unifi-os/backups
+
+# Required tmpfs mounts. systemd needs writable /run, /tmp, journal, and
+# UniFi's tmp dir. Override sizeLimit if you have unusual workloads.
+tmpfs:
+  run:        { sizeLimit: "" }
+  runLock:    { sizeLimit: "" }
+  tmp:        { sizeLimit: "" }
+  journal:    { sizeLimit: "" }
+  unifiTmp:   { sizeLimit: "64Mi" }
+
+# Mount /sys/fs/cgroup from the host so systemd-in-container works. Required
+# unless you're on a host with cgroupsv2-only and have set it up specifically.
+cgroupHostPath:
+  enabled: true
+  path: /sys/fs/cgroup
+
+# Service definitions. Each entry mirrors a port that UOS listens on.
+# Keep `webui` enabled — that's the management UI. The rest are optional
+# depending on which UOS features you use.
+service:
+  type: ClusterIP
+  # When type is LoadBalancer, this IP is requested. Empty = let the cluster
+  # decide.
+  loadBalancerIP: ""
+  # Annotations applied to all created services.
+  annotations: {}
+  # External traffic policy for LoadBalancer/NodePort services.
+  # "Cluster" works in all cases. "Local" preserves source IP but with
+  # MetalLB+shared-IP it requires *every* sharing service to land on the
+  # node hosting the pod, which isn't guaranteed; if MetalLB picks any
+  # other node, traffic gets dropped (RST). Default to "Cluster" for
+  # reliability; switch to "Local" only if you can guarantee node placement.
+  externalTrafficPolicy: Cluster
+
+ports:
+  # Each entry may set `annotations: { ... }` to add per-service annotations
+  # (merged on top of `service.annotations` above). Useful for example to set
+  # external-mdns hostnames on just the webui service.
+  webui:            { enabled: true,  port: 443,   targetPort: 443,   protocol: TCP, description: "Web UI / API" }
+  communication:    { enabled: true,  port: 8080,  targetPort: 8080,  protocol: TCP, description: "Device communication / inform" }
+  stun:             { enabled: true,  port: 3478,  targetPort: 3478,  protocol: UDP, description: "STUN" }
+  discovery:        { enabled: true,  port: 10003, targetPort: 10003, protocol: UDP, description: "L2 device discovery" }
+  networkApp:       { enabled: false, port: 8443,  targetPort: 8443,  protocol: TCP, description: "Legacy Network app port" }
+  hotspotSecured:   { enabled: false, port: 8444,  targetPort: 8444,  protocol: TCP, description: "Hotspot HTTPS portal" }
+  hotspotRedirect0: { enabled: false, port: 8880,  targetPort: 8880,  protocol: TCP, description: "Hotspot HTTP redirect" }
+  hotspotRedirect1: { enabled: false, port: 8881,  targetPort: 8881,  protocol: TCP, description: "Hotspot HTTP redirect" }
+  hotspotRedirect2: { enabled: false, port: 8882,  targetPort: 8882,  protocol: TCP, description: "Hotspot HTTP redirect" }
+  rtp:              { enabled: false, port: 5005,  targetPort: 5005,  protocol: TCP, description: "RTP voice" }
+  idHub:            { enabled: false, port: 9543,  targetPort: 9543,  protocol: TCP, description: "Identity Hub" }
+  mobileSpeedtest:  { enabled: false, port: 6789,  targetPort: 6789,  protocol: TCP, description: "Mobile speedtest" }
+  siteSupervisor:   { enabled: false, port: 11084, targetPort: 11084, protocol: TCP, description: "Site Supervisor" }
+  aqmps:            { enabled: false, port: 5671,  targetPort: 5671,  protocol: TCP, description: "AMQPS" }
+  syslog:           { enabled: false, port: 5514,  targetPort: 5514,  protocol: UDP, description: "Syslog" }
+
+# Single ingress for the web UI. UOS terminates TLS itself, so the ingress
+# must speak HTTPS to the backend.
+ingress:
+  enabled: false
+  className: nginx
+  host: unifi.example.com
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+  tls:
+    enabled: true
+    # Empty = derive name from cert-manager (if enabled) or default to
+    # "<release>-unifi-os-server-tls". Set explicitly to point the ingress
+    # at a Secret you manage out of band.
+    secretName: ""
+  path: /
+  pathType: Prefix
+
+# Optional cert-manager Certificate for the ingress TLS secret. When enabled,
+# cert-manager issues and rotates a cert into <fullname>-tls (or
+# certManager.secretName if set), and the ingress template picks that secret
+# up automatically.
+#
+# Note: this controls the secret in front of the ingress, not the cert UOS's
+# bundled nginx serves to devices. UniFi rotates its internal cert itself.
+certManager:
+  enabled: false
+  # Override the generated Secret name. Leave empty for "<fullname>-tls".
+  secretName: ""
+  issuerRef:
+    name: ""              # required when enabled (e.g. "letsencrypt-prod")
+    kind: ClusterIssuer   # or "Issuer"
+    group: cert-manager.io
+  # Required: at least one of dnsNames or ipAddresses.
+  dnsNames: []
+  # - unifi.example.com
+  ipAddresses: []
+  commonName: ""
+  duration: ""             # e.g. "2160h"
+  renewBefore: ""          # e.g. "360h"
+  subject: {}
+  privateKey: {}
+  #  algorithm: ECDSA
+  #  size: 256
+  #  rotationPolicy: Always
+  usages: []
+  annotations: {}
+
+# Single-replica only — this is a stateful appliance.
+replicaCount: 1
+strategy:
+  type: Recreate
+
+# Liveness probe hits the bundled nginx /api/ping. Set initialDelaySeconds
+# generously; full systemd boot of UOS can take several minutes on first run.
+probes:
+  liveness:
+    enabled: true
+    httpGet:
+      path: /api/ping
+      port: 80
+    initialDelaySeconds: 180
+    periodSeconds: 60
+    timeoutSeconds: 10
+    failureThreshold: 5
+  readiness:
+    enabled: true
+    httpGet:
+      path: /api/ping
+      port: 80
+    initialDelaySeconds: 60
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 10
+
+# Pod & deployment annotations / labels.
+podAnnotations: {}
+podLabels: {}
+
+# Optional Prometheus exporter (unpoller) — runs as a separate Deployment that
+# scrapes UOS over HTTPS and exposes /metrics on port 9130. Three auth modes:
+#
+#   1. API key (recommended, UniFi OS 4+):
+#        unifiExporter.config.apiKey: "..."
+#      Generate at Settings → Admins & Users → (your user) → API Key.
+#
+#   2. Username + password (local Viewer admin):
+#        unifiExporter.config.username: "metrics"
+#        unifiExporter.config.password: "..."
+#
+#   3. Pre-existing Secret (mount whatever you keep in ESO/Vault):
+#        unifiExporter.existingSecret.name: my-secret
+#        unifiExporter.existingSecret.passwordKey: password
+#        unifiExporter.existingSecret.apiKeyKey:   api-key
+#      The api-key field, when non-empty, takes precedence over password.
+unifiExporter:
+  enabled: false
+  image:
+    repository: ghcr.io/unpoller/unpoller
+    tag: "v2.34.0"
+    pullPolicy: IfNotPresent
+  config:
+    # UniFi OS controller URL. Empty = derive from the chart's webui Service:
+    # https://<release>-unifi-os-server-webui.<namespace>.svc.cluster.local
+    url: ""
+    username: ""
+    password: ""
+    apiKey: ""
+    verifyTLS: false
+    saveSites: true
+    saveDpi: false
+    saveEvents: false
+    saveAlarms: false
+    saveAnomalies: false
+    saveIds: false
+    hashPii: false
+  existingSecret:
+    name: ""
+    passwordKey: password
+    apiKeyKey: api-key
+  # Annotations applied to the exporter pod. Use these for annotation-based
+  # Prometheus scrape discovery (the default kubernetes_sd_configs
+  # configuration in the prometheus-community chart). Leave empty if you
+  # use ServiceMonitor instead.
+  podAnnotations: {}
+  #  prometheus.io/scrape: "true"
+  #  prometheus.io/port: "9130"
+  #  prometheus.io/path: "/metrics"
+  serviceMonitor:
+    # Requires the Prometheus Operator CRDs.
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+

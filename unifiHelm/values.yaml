@@ -1,0 +1,28 @@
+systemIp: unifi.huntrrose.local
+
+persistence:
+  data:
+    enabled: true
+    storageClass: nfs-server
+    accessMode: ReadWriteOnce
+    size: 30Gi
+  mongo:
+    enabled: true
+    storageClass: nfs-server
+    accessMode: ReadWriteOnce
+    size: 10Gi
+  backups:
+    enabled: true
+    storageClass: nfs-server
+    accessMode: ReadWriteOnce
+    size: 10Gi
+
+service:
+  type: LoadBalancer
+  loadBalancerIP: "10.50.0.151"
+  labels:
+    env: internal
+
+unifiExporter:
+  serviceMonitor:
+    enabled: true
