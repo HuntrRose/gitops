@@ -1,18 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: unifios
+  name: stirling-pdf
   namespace: argocd
 spec:
   project: default
   sources:
-    - repoURL: https://rubxkube.github.io/charts/
-      chart: stirling-pdf
-      targetRevision: 0.0.9
+    - repoURL: https://chrissnell.github.io/unifi-os-kubernetes
+      chart: unifi-os/unifi-os-server
+      targetRevision: 0.2.3
       helm:
         valueFiles:
-          - $values/unifiHelm/values.yaml
-          
+          - $values/unifiHelm/values.yaml     
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       ref: values
