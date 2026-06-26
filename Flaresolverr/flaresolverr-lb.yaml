@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: flaresolverr
+    env: internal
+  name: flaresolverr-lb
+  namespace: flaresolverr
+spec:
+  ports:
+    - name: http
+      port: 8191
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/instance: flaresolverr
+    app.kubernetes.io/name: flaresolverr
+  type: LoadBalancer
