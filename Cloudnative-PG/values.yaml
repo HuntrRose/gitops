@@ -1,0 +1,5 @@
+monitoring:
+  podMonitorEnabled: true
+  grafanaDashboar:
+    create: true
+   

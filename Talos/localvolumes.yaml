@@ -1,0 +1,11 @@
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: local-volume
+provisioning:
+  diskSelector:
+    match: disk.model == "Virtual Disk"
+  minSize: 15GB
+  maxSize: 22GB
+
+    
+          
