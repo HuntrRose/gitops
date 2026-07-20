@@ -1,6 +1,6 @@
 apiVersion: v1alpha1
 kind: UserVolumeConfig
-name: local-volume
+name: local-path-provisioner
 provisioning:
   diskSelector:
     match: disk.model == "Virtual Disk"

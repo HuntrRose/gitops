@@ -1,0 +1,10 @@
+cluster:
+  storage:
+    size: 8Gi
+    storageClass: local-path
+  monitoring:
+    enabled: true
+    podMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true

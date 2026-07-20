@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tetragon
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.cilium.io
+      chart: tetragon
+      targetRevision: 1.7.0
+      helm:
+        valueFiles:
+        - $values/Tetragon/values.yaml
+          
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      path: Tetragon 
+    # - repoURL: https://github.com/huntrrose/gitops.git
+    #   targetRevision: HEAD
+    #   path: Stirling
+      
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    # syncOptions:
+    #   - CreateNamespace=true
+
+  
