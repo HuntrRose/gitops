@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: reactive-resume
+  name: reactive-resume
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reactive-resume
+  template:
+    metadata:
+      labels:
+        app: reactive-resume
+    spec:
+      containers:
+      - image: ghcr.io/amruthpillai/reactive-resume:v5.2.6
+        name: reactive-resume

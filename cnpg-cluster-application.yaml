@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cnpg-cluster
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://cloudnative-pg.github.io/charts
+      chart: cluster
+      targetRevision: 0.8.1
+      helm:
+        valueFiles:
+          - $values/Cloudnative-PG-Cluster/values.yaml
+          
+    - repoURL: https://github.com/huntrrose/gitops.git
+      targetRevision: HEAD
+      ref: values
+    # - repoURL: https://github.com/huntrrose/gitops.git
+    #   targetRevision: HEAD
+    #   path: Cloudnative-PG  
+    
+      
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cnpg-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+
+  
