@@ -1,0 +1,20 @@
+# vault-auth.yaml
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: resume-vault-auth
+  namespace: resume
+spec:
+  # Reference to VaultConnection
+  vaultConnectionRef: vault-secrets-operator/default
+
+  # Authentication method
+  method: kubernetes
+
+  # Mount path for auth method
+  mount: kubernetes
+
+  # Kubernetes auth configuration
+  kubernetes:
+    role: read_resume
+    serviceAccount: default

@@ -4,6 +4,7 @@ metadata:
   labels:
     app: reactive-resume
   name: reactive-resume
+  namespace: resume
 spec:
   replicas: 1
   selector:
@@ -17,3 +18,16 @@ spec:
       containers:
       - image: ghcr.io/amruthpillai/reactive-resume:v5.2.6
         name: reactive-resume
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: resume-db-secret
+                key: uri
+        volumeMounts:
+          - mountPath: /app/data
+            name: resumedata
+    volumes:
+      - name: resumedata
+        persistentVolumeClaim:
+          claimName: resume-storage
