@@ -7,6 +7,5 @@ spec:
   accessModes:
     - ReadWriteOnce
   resource:
-    requests:
-      storage: 2Gi
-      # storageclass: longhorn #Default
+    storage: 2Gi
+    # storageclass: longhorn #Default
