@@ -37,7 +37,8 @@ spec:
     labels:
       env: internal
   allowedListeners:
-    from: All
+    namespaces:
+      from: All
   listeners:
     - protocol: HTTP
       port: 80
