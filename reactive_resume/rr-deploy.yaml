@@ -27,7 +27,7 @@ spec:
         volumeMounts:
           - mountPath: /app/data
             name: resumedata
-    volumes:
-      - name: resumedata
-        persistentVolumeClaim:
-          claimName: resume-storage
+      volumes:
+        - name: resumedata
+          persistentVolumeClaim:
+            claimName: resume-storage
