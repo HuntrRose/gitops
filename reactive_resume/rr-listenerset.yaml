@@ -8,7 +8,7 @@ metadata:
 spec:
   parentRef:
     name: gw-internal
-    namespace: gateways
+    namespace: gateway
 #    kind: Gateway
 #    group: gateway.networking.k8s.io
   listeners:

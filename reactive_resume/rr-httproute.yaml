@@ -3,13 +3,17 @@ kind: HTTPRoute
 metadata:
   name: resume-httproute
   namespace: resume
+  labels:
+    env: internal
 spec:
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: ListenerSet
-    name: resume-listeners
-    namespace: resume
-    sectionName: http
+#  - group: gateway.networking.k8s.io
+#    kind: ListenerSet
+#    name: resume-listeners
+#    namespace: resume
+#    sectionName: http
+  - name: gw-internal
+    namespace: gateways
   hostnames:
   - resume.huntrrose.local
   rules:
