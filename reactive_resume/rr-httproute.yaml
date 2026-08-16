@@ -15,4 +15,5 @@ spec:
   rules:
   - backendRefs:
     - name: resume-svc
+      namespace: resume
       port: 80
