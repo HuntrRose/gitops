@@ -11,7 +11,7 @@ spec:
     kind: ListenerSet
     name: resume-listeners
     namespace: resume
-    sectionName: http
+    sectionName: resume-http
   hostnames:
   - resume.huntrrose.local
   rules:
