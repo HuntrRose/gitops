@@ -6,6 +6,6 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  resource:
+  resources:
     storage: 2Gi
     # storageclass: longhorn #Default
