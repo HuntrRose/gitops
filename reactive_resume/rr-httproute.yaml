@@ -8,6 +8,7 @@ spec:
   - group: gateway.networking.k8s.io
     kind: ListenerSet
     name: resume-listeners
+    namespace: resume
     sectionName: http
   hostnames:
   - resume.huntrrose.local
