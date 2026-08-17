@@ -20,7 +20,9 @@ spec:
         name: reactive-resume
         env:
           - name: APP_URL
-            value: "http://localhost:3000"
+            value: "http://resume.huntrrose.local"
+          - name: PUBLIC_URL
+            value: "http://resume.huntrrose.local"
           - name: AUTH_SECRET
             valueFrom:
               secretKeyRef:
