@@ -45,6 +45,7 @@ gatewayAPI:
 encryption:
   enabled: true
   type: wireguard
+  nodeEncryption: true
 operator:
   replicas: 1
 # envoyConfig:
