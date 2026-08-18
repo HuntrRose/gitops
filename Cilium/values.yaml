@@ -42,6 +42,9 @@ gatewayAPI:
   enabled: true
   enableAppProtocol: true
   enableAlpn: true
+encryption:
+  enabled: true
+  type: wireguard
 operator:
   replicas: 1
 # envoyConfig:
