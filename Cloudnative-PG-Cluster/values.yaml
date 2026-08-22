@@ -8,3 +8,11 @@ cluster:
       enabled: true
     prometheusRule:
       enabled: true
+  roles: 
+    - name: ncdb 
+      ensure: present
+      comment: NextCloud DB User
+      login: true
+      superuser: false
+      passwordSecret:
+        name: 

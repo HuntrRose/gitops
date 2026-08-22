@@ -1,0 +1,28 @@
+# vault-static-secret.yaml
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: nc-db-user 
+  namespace: cnpg-system   
+spec:
+  # Authentication reference
+  vaultAuthRef: cnpg-system/cluster-vault-auth
+
+  # Vault path (KV v2)
+  mount: kv2
+  type: kv-v2
+  path: data/nc-db-user
+
+  # Kubernetes Secret to create
+  destination:
+    name: nc-db-user
+ #   namespace: resume
+    create: true
+
+  # Refresh interval
+  refreshAfter: 1h
+
+  # Rollout restart annotations
+#  rolloutRestartTargets:
+#  - kind: Deployment
+#    name: myapp
