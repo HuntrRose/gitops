@@ -2327,7 +2327,8 @@ server:
     # -- Server service annotations
     annotations: {}
     # -- Server service labels
-    labels: {}
+    labels:
+      - env: internal
     # -- Server service type
     type: LoadBalancer
     # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
@@ -2346,9 +2347,9 @@ server:
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol
     servicePortHttpsAppProtocol: kubernetes.io/h2c
     # -- The class of the load balancer implementation
-    loadBalancerClass: ""
+    loadBalancerClass: cilium
     # -- LoadBalancer will get created with the IP specified in this field
-    loadBalancerIP: "10.50.0.150"
+    loadBalancerIP: ""
     # -- Source IP ranges to allow access to service from
     ## EKS Ref: https://repost.aws/knowledge-center/eks-cidr-ip-address-loadbalancer
     ## GKE Ref: https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview#limit-connectivity-ext-lb
