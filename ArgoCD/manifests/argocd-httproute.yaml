@@ -16,7 +16,7 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-      - name: argocd-server
+      - name: argocd-app-server
         namespace: argocd
         port: 80
 ---
@@ -38,7 +38,7 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-      - name: argocd-server
+      - name: argocd-app-server
         namespace: argocd
         port: 443
 
