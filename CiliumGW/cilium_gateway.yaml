@@ -50,7 +50,7 @@ spec:
       port: 443
       name: https-gw
       tls:
-        mode: passthrough
+        mode: Passthrough
       allowedRoutes:
         kinds:
           - kind: TLSRoute
