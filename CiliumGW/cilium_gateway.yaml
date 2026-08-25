@@ -46,10 +46,14 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - protocol: HTTPS 
+    - protocol: TLS 
       port: 443
       name: https-gw
+      tls:
+        mode: passthrough
       allowedRoutes:
+        kinds:
+          - kind: TLSRoute
         namespaces:
           from: All
       
