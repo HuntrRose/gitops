@@ -46,6 +46,12 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - protocol: GRPC
+      port: 443
+      name: grpc-gw
+      allowedRoutes:
+        namespaces:
+          from: All
 
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: HTTPRoute
