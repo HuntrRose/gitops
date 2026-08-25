@@ -2347,7 +2347,7 @@ server:
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol
     servicePortHttpsAppProtocol: kubernetes.io/h2c
     # -- The class of the load balancer implementation
-    loadBalancerClass: "" 
+    loadBalancerClass: cilium 
     # -- LoadBalancer will get created with the IP specified in this field
     loadBalancerIP: ""
     # -- Source IP ranges to allow access to service from
