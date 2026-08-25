@@ -1,0 +1,14 @@
+
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: nextcloud-db
+  namespace: cnpg-system 
+spec:
+  name: nc-db 
+  owner: ncdb
+  cluster:
+    name: cnpg-cluster
+  extensions:
+  - name: bloom
+    ensure: present

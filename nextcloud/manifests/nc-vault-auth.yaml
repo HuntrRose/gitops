@@ -1,0 +1,20 @@
+
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: nc-vault-auth
+  namespace: nextcloud
+spec:
+  # Reference to VaultConnection
+  vaultConnectionRef: vault-secrets-operator/default
+
+  # Authentication method
+  method: kubernetes
+
+  # Mount path for auth method
+  mount: kubernetes
+
+  # Kubernetes auth configuration
+  kubernetes:
+    role: read_nc_user
+    serviceAccount: default

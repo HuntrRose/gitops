@@ -1,0 +1,25 @@
+nextcloud:
+  host: nc.huntrrose.com
+internalDatabase:
+  enabled: false
+externalDatabase:
+  enable: true
+  type: postgresql
+  existingSecret:
+    enabled: true
+    secretName: nc-db-secret
+    usernameKey: username
+    passwordKey: password
+    hostKey: host
+    databaseKey: db
+
+persistence:
+  # Nextcloud Data (/var/www/html)
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
+#  nextcloudData:
+#    enabled: true
+#    accessMode: ReadWriteOnce
+#    size: 8Gi
+
