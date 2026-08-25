@@ -2328,7 +2328,7 @@ server:
     annotations: {}
     # -- Server service labels
     labels:
-      - env: internal
+      env: internal
     # -- Server service type
     type: LoadBalancer
     # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
