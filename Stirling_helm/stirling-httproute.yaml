@@ -7,7 +7,7 @@ spec:
   parentRefs:
     - name: gw-internal
       namespace: gateway
-      # sectionName: web-gw
+      sectionName: web-gw
   hostnames:
     - stirling.huntrrose.local
   rules:
