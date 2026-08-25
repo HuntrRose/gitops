@@ -8,7 +8,7 @@ spec:
     - name: gw-internal
       namespace: gateway
       sectionName: web-gw
-  Chostnames:
+  hostnames:
     - argocd.huntrrose.local
   rules:
   - matches:
@@ -16,7 +16,7 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-      - name: argocd-app-server
+      - name: argocd-server
         namespace: argocd
         port: 80
 ---
@@ -38,7 +38,7 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-      - name: argocd-app-server
+      - name: argocd-server
         namespace: argocd
         port: 443
 
