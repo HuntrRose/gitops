@@ -24,6 +24,8 @@ persistence:
 #    size: 8Gi
 httpRoute:
   enabled: true
+  hostnames:
+    - nc.huntrrose.com
   parentRefs:
   - name: gw-external
     namespace: gateway
