@@ -6,7 +6,6 @@ metadata:
 spec:
   cluster:
     name: cluster-example
-    namespace: cnpg-system
   name: 
     valueFrom:
       secretKeyRef:
