@@ -6,11 +6,11 @@ metadata:
 spec:
   cluster:
     name: cluster-example
-  name: 
-    valueFrom:
-      secretKeyRef:
-        name: nc-db-secret
-        key: username
+  name: ncdb 
+#    valueFrom:
+#      secretKeyRef:
+#        name: nc-db-secret
+#        key: username
   comment: "Nextcloud user"
   login: true
   superuser: false
@@ -20,4 +20,4 @@ spec:
     - pg_monitor
   passwordSecret:
     name: nc-db-secret
-    key: password
+#    key: password
