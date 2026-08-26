@@ -25,7 +25,7 @@ persistence:
 httpRoute:
   enabled: true
   parentRefs:
-    name: gw-external
+  - name: gw-external
     namespace: gateway
   wellKnown:
     enabled: false
