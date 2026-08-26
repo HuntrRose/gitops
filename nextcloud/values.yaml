@@ -22,4 +22,15 @@ persistence:
 #    enabled: true
 #    accessMode: ReadWriteOnce
 #    size: 8Gi
-
+httpRoute:
+  enabled: true
+  parentRefs:
+    name: gw-external
+    namespace: gateway
+  wellKnown:
+    enabled: false
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/"
