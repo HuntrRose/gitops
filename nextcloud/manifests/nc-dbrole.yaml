@@ -1,0 +1,24 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: role-dante
+  namespace: cnpg-system
+spec:
+  cluster:
+    name: cluster-example
+    namespace: cnpg-system
+  name: 
+    valueFrom:
+      secretKeyRef:
+        name: nc-db-secret
+        key: username
+  comment: "Nextcloud user"
+  login: true
+  superuser: false
+  createdb: true
+  databaseRoleReclaimPolicy: delete
+  inRoles:
+    - pg_monitor
+  passwordSecret:
+    name: nc-db-secret
+    key: password
