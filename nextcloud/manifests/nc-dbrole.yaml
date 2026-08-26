@@ -2,15 +2,15 @@ apiVersion: postgresql.cnpg.io/v1
 kind: DatabaseRole
 metadata:
   name: role-nextcloud
-  namespace: cnpg-system
+  namespace: cnpg-system 
 spec:
   cluster:
-    name: cluster-example
+    name: cnpg-cluster
   name: ncdb 
 #    valueFrom:
 #      secretKeyRef:
 #        name: nc-db-secret
-#        key: username
+#        kdey: username
   comment: "Nextcloud user"
   login: true
   superuser: false
@@ -19,5 +19,7 @@ spec:
   inRoles:
     - pg_monitor
   passwordSecret:
-    name: nc-db-secret
-#    key: password
+    name: nc-db-user
+#    namespace: nextcloud
+#    ke: password
+#
