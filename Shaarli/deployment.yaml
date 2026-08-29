@@ -85,7 +85,7 @@ metadata:
   namespace: shaarli
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-staging
-    acme.cert-manager.io/http01-parentalreffallback: "true"
+    acme.cert-manager.io/http01-parentreffallback: "true"
   labels:
     access: external
 spec:
