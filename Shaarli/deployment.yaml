@@ -32,15 +32,15 @@ spec:
       containers:
       - name: shaarli
         image:  ghcr.io/shaarli/shaarli:latest
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
-          seccompProfile:
-            type: RuntimeDefault
-          runAsNonRoot: true
-          runAsUser: 1000
-          runAsGroup: 1000
+       # securityContext:
+       #   allowPrivilegeEscalation: false
+       #   capabilities:
+       #     drop: ["ALL"]
+       #   seccompProfile:
+       #     type: RuntimeDefault
+       #   runAsNonRoot: true
+       #   runAsUser: 1000
+       #   runAsGroup: 1000
         resources:
           limits:
             memory: "512Mi"
