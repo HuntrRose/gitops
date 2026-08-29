@@ -6,12 +6,13 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: oci://quay.io/jetstack/charts/cert-manager
-      targetRevision: 1.20.2
-      # path: .
+    - repoURL: quay.io/jetstack/charts
+      chart: cert-manager
+      targetRevision: 1.21.1
+      path: .
       helm:
         valueFiles:
-           $values/CertManager/values.yaml
+          - $values/Certmanager/values.yaml
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       ref: values
