@@ -32,19 +32,18 @@ spec:
       containers:
       - name: shaarli
         image:  ghcr.io/shaarli/shaarli:latest
-        # securityContext:
-        #   allowPrivilegeEscalation: false
-        #   capabilities:
-        #     drop: ["ALL"]
-        #   seccompProfile:
-        #     type: RuntimeDefault
-        #   runAsNonRoot: true
-        #   runAsUser: 1000
-        #   runAsGroup: 1000
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: RuntimeDefault
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
         resources:
           limits:
             memory: "512Mi"
-            cpu: "500m"
           requests:
             memory: "256Mi"
             cpu: "250m"
@@ -78,7 +77,31 @@ spec:
       protocol: TCP
       port: 443
   type: ClusterIP
----  
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: shaarli-listener
+  namespace: shaarli
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+  labels:
+    access: external
+spec:
+  parentRef:
+    name: gw-external
+    namespace: gateway
+  listeners:
+    - name: shaarli-https
+      hostname: shaarli.huntrrose.com
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: terminate
+        certificateRefs:
+          - kind: Secret
+            name: shaarli-cert
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -86,9 +109,9 @@ metadata:
   namespace: shaarli
 spec:
   parentRefs:
-    - name: gw-external
-      namespace: gateway
-      sectionName: shaarli-http
+    - name: shaarli-listener
+      namespace: shaarli
+      sectionName: shaarli-https
   rules:
     - matches:
       - path:
