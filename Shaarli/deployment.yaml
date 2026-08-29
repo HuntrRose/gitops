@@ -113,6 +113,7 @@ spec:
     - name: shaarli-listener
       namespace: shaarli
       sectionName: shaarli-https
+      kind: ListenerSet
   rules:
     - matches:
       - path:
