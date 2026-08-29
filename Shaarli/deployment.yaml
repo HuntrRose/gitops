@@ -97,7 +97,7 @@ spec:
       port: 443
       protocol: HTTPS
       tls:
-        mode: terminate
+        mode: Terminate
         certificateRefs:
           - kind: Secret
             name: shaarli-cert
