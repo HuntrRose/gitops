@@ -27,38 +27,38 @@ spec:
  #       namespaces:
  #         from: All
 
-# ---
-# apiVersion: gateway.networking.k8s.io/v1
-# kind: Gateway
-# metadata:
-#   name: gw-internal
-#   labels:
-#     env: internal
-# spec:
-#   gatewayClassName: cilium
-#   infrastructure:
-#     labels:
-#       env: internal
-#   allowedListeners:
-#     namespaces:
-#       from: All
-#   listeners:
-#     - protocol: HTTP
-#       port: 80
-#       name: web-gw
-#       allowedRoutes:
-#         namespaces:
-#           from: All
-#     - protocol: TLS 
-#       port: 443
-#       name: https-gw
-#       tls:
-#         mode: Passthrough
-#       allowedRoutes:
-#         kinds:
-#           - kind: TLSRoute
-#         namespaces:
-#           from: All
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gw-internal
+  labels:
+    env: internal
+spec:
+  gatewayClassName: cilium
+  infrastructure:
+    labels:
+      env: internal
+  allowedListeners:
+    namespaces:
+      from: All
+  listeners:
+    - protocol: HTTP
+      port: 80
+      name: web-gw
+      allowedRoutes:
+        namespaces:
+          from: All
+    - protocol: TLS 
+      port: 443
+      name: https-gw
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        kinds:
+          - kind: TLSRoute
+        namespaces:
+          from: All
       
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: HTTPRoute
