@@ -1,0 +1,137 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+  namespace: test
+  labels:
+    app: test
+    env: internal
+    access: internal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+        access: internal
+    spec:
+      containers:
+      - name: test
+        image:  nginx:latest
+        resources:
+          limits:
+            memory: "512Mi"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+        ports:
+          - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: test
+  namespace: test
+#  labels:
+#    access: internal
+spec: 
+  selector:
+    app: test
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+    - name: https
+      protocol: TCP
+      port: 443
+  type: ClusterIP
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: test-listener
+  namespace: test
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    acme.cert-manager.io/http01-parentreffallback: "true"
+spec:
+  parentRef:
+    name: gw-external
+    namespace: gateway
+  listeners:
+    - name: test-https
+      hostname: test.huntrrose.com
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: test-cert
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: test-listener-int
+  namespace: test
+spec:
+  parentRef:
+    name: gw-internal
+    namespace: gateway
+  listeners:
+    - name: test-https
+      hostname: test.huntrrose.com
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: test-cert
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: test
+  namespace: test
+spec:
+  parentRefs:
+    - name: test-listener-int
+      namespace: test
+      sectionName: test-https
+      kind: ListenerSet
+  rules:
+    - matches:
+      - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: test
+          namespace: test
+          port: 80
+# ---
+# apiVersion: 'cilium.io/v2'
+# kind: CiliumClusterwideNetworkPolicy
+# metadata:
+#   name: allow-cidr-to-labeled
+# spec:
+#   endpointSelector:
+#     matchLabels:
+#       access: internal
+# 
+#   ingress:
+#     - fromCIDR:
+#         - 10.50.0.0/24
+#       toPorts:
+#       - ports:
+#         - port: "80"
+#           protocol: TCP
+#         rules:
+#           http:
+#             - method: 'GET'
+#               path: '/'
+# 
