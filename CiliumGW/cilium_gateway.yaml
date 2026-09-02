@@ -33,8 +33,6 @@ kind: Gateway
 metadata:
   name: gw-internal
   labels:
-      tls:
-        mode: Passthrough
     env: internal
 spec:
   gatewayClassName: cilium
