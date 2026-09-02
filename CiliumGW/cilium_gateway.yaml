@@ -33,6 +33,8 @@ kind: Gateway
 metadata:
   name: gw-internal
   labels:
+      tls:
+        mode: Passthrough
     env: internal
 spec:
   gatewayClassName: cilium
@@ -49,14 +51,10 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - protocol: TLS 
+    - protocol: HTTPS 
       port: 443
       name: https-gw
-      tls:
-        mode: Passthrough
       allowedRoutes:
-        kinds:
-          - kind: TLSRoute
         namespaces:
           from: All
       
