@@ -28,7 +28,7 @@ metadata:
 spec:
   parentRefs:
     - name: argocd-listener-int
-      type: ListenerSet
+      kind: ListenerSet
       sectionName: https
   hostnames:
     - argocd.huntrrose.com
