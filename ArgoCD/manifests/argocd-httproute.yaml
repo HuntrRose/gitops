@@ -40,4 +40,27 @@ spec:
     - backendRefs:
       - name: argocd-server
         namespace: argocd
+        kind: Service
         port: 443
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: argocd-https-dummy
+  namespace: argocd
+spec:
+  parentRefs:
+    - name: argocd-listener
+      kind: ListenerSet
+      sectionName: https
+  hostnames:
+    - argocd.huntrrose.com
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+#    - backendRefs:
+#      - name: argocd-server
+#        namespace: argocd
+#        port: 443
