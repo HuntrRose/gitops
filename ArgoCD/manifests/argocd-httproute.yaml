@@ -28,7 +28,7 @@ metadata:
 spec:
   parentRefs:
     - name: argocd-listener-int
-#      namespace: gateway
+      type: ListenerSet
       sectionName: https
   hostnames:
     - argocd.huntrrose.com
