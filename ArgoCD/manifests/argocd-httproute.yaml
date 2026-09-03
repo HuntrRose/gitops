@@ -37,7 +37,7 @@ spec:
     - path:
         type: PathPrefix
         value: /
-    - backendRefs:
+      backendRefs:
       - name: argocd-server
         namespace: argocd
         kind: Service
