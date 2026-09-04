@@ -11,16 +11,16 @@ cluster:
       enabled: true
     prometheusRule:
       enabled: true
-  affinity:
-    enablePodAntiAffinity: true
-    topologyKey: kubernetes.io/hostname
-    podAntiAffinityType: required
-    nodeSelector:
-      node-role.kubernetes.io/postgres: ""
-    tolerations:
-    - key: node-role.kubernetes.io/postgres
-      operator: Exists
-      effect: NoSchedule
+#  affinity:
+#    enablePodAntiAffinity: true
+#    topologyKey: kubernetes.io/hostname
+#    podAntiAffinityType: required
+#    nodeSelector:
+#      node-role.kubernetes.io/postgres: ""
+#    tolerations:
+#    - key: node-role.kubernetes.io/postgres
+#      operator: Exists
+#      effect: NoSchedule
 #  roles: 
 #    - name: ncdb 
 #      ensure: present
