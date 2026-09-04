@@ -3,7 +3,7 @@ apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
 metadata:
   name: cluster-vault-auth
-  namespace: cnpg-system
+  namespace: cnpg-cluster
 spec:
   # Reference to VaultConnection
   vaultConnectionRef: vault-secrets-operator/default

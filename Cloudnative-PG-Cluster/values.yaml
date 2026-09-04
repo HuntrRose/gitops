@@ -2,12 +2,25 @@ cluster:
   storage:
     size: 10Gi
     storageClass: local-path
+  walStorage:
+    enabled: true
+    storageClass: nfs-server
   monitoring:
     enabled: true
     podMonitor:
       enabled: true
     prometheusRule:
       enabled: true
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
+    nodeSelector:
+      node-role.kubernetes.io/postgres: ""
+    tolerations:
+    - key: node-role.kubernetes.io/postgres
+      operator: Exists
+      effect: NoSchedule
 #  roles: 
 #    - name: ncdb 
 #      ensure: present
@@ -15,4 +28,4 @@ cluster:
 #      login: true
 #      superuser: false
 #      passwordSecret:
-#        name: 
+#        name: nc-db-user 

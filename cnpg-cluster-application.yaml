@@ -12,18 +12,15 @@ spec:
       helm:
         valueFiles:
           - $values/Cloudnative-PG-Cluster/values.yaml
-          
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
       ref: values
     - repoURL: https://github.com/huntrrose/gitops.git
       targetRevision: HEAD
-      path: Cloudnative-PG-Cluster  
-    
-      
+      path: Cloudnative-PG-Cluster/manifests  
   destination:
     server: https://kubernetes.default.svc
-    namespace: cnpg-system
+    namespace: cnpg-cluster
   syncPolicy:
     automated:
       prune: true
@@ -31,5 +28,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-
-  
