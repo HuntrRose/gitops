@@ -1,0 +1,68 @@
+# vault-static-secret.yaml
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: resume-db-owner
+  namespace: cnpg-cluster
+spec:
+  # Authentication reference
+  vaultAuthRef: cnpg-system/cluster-vault-auth
+
+  # Vault path (KV v2)
+  mount: dbowners
+  type: kv-v2
+  path: data/reactive_resume_owner
+
+  # Kubernetes Secret to create
+  destination:
+    name: resume-db-owner
+ #   namespace: resume
+    create: true
+
+  # Refresh interval
+  refreshAfter: 1h
+
+  # Rollout restart annotations
+#  rolloutRestartTargets:
+#  - kind: Deployment
+#    name: myapp
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: resume-db-owner
+  namespace: cnpg-cluster
+spec:
+  cluster:
+    name: cnpg-cluster
+  name:
+    valueFrom:
+      secretKeyRef:
+        name: resume-db-owner
+        key: username
+  comment: "Owner role for resume DB"
+  login: true
+  superuser: false
+  createdb: true
+  databaseRoleReclaimPolicy: delete
+  inRoles:
+    - pg_monitor
+  passwordSecret:
+    name: resume-db-owner
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: resume-db
+spec:
+  name: resume-db
+  owner:
+    valueFrom:
+      secretKeyRef:
+        name: resume-db-owner
+        key: username
+  cluster:
+    name: cnpg-cluster
+  extensions:
+    - name: bloom
+      ensure: present
