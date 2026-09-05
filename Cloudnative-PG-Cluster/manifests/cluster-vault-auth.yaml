@@ -16,5 +16,6 @@ spec:
 
   # Kubernetes auth configuration
   kubernetes:
-    role: cnpg_cluster
+    #role: cnpg_cluster
+    role: test
     serviceAccount: default
