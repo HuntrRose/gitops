@@ -9,9 +9,9 @@ spec:
   vaultAuthRef: cnpg-cluster/cluster-vault-auth
 
   # Vault path (KV v2)
-  mount: dbowners
+  mount: dbusers
   type: kv-v2
-  path: data/reactive_resume_owner
+  path: resume/owner
 
   # Kubernetes Secret to create
   destination:
