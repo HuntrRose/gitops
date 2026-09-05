@@ -6,7 +6,7 @@ metadata:
   namespace: cnpg-cluster
 spec:
   # Authentication reference
-  vaultAuthRef: cnpg-system/cluster-vault-auth
+  vaultAuthRef: cnpg-cluster/cluster-vault-auth
 
   # Vault path (KV v2)
   mount: dbowners
