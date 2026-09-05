@@ -11,7 +11,7 @@ spec:
   # Vault path (KV v2)
   mount: dbusers
   type: kv-v2
-  path: resume/owner
+  path: data/resume/owner
 
   # Kubernetes Secret to create
   destination:
