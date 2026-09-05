@@ -11,7 +11,7 @@ spec:
   # Vault path (KV v2)
   mount: dbowners
   type: kv-v2
-  path: reactive_resume_owner
+  path: data/reactive_resume_owner
 
   # Kubernetes Secret to create
   destination:
