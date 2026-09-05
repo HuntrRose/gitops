@@ -35,11 +35,7 @@ metadata:
 spec:
   cluster:
     name: cnpg-cluster
-  name:
-    valueFrom:
-      secretKeyRef:
-        name: resume-db-owner
-        key: username
+  name: reactive_resume
   comment: "Owner role for resume DB"
   login: true
   superuser: false
@@ -56,11 +52,7 @@ metadata:
   name: resume-db
 spec:
   name: resume-db
-  owner:
-    valueFrom:
-      secretKeyRef:
-        name: resume-db-owner
-        key: username
+  owner: reactive_resume
   cluster:
     name: cnpg-cluster
   extensions:
