@@ -22,7 +22,7 @@ spec:
   method: kubernetes
 
   # Mount path for auth method
-  mountPath: kubernetes
+  mount: kubernetes
 
   # Kubernetes auth configuration
   kubernetes:
