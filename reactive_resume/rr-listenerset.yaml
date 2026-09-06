@@ -5,7 +5,7 @@ metadata:
   namespace: resume
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    acme.cert-manager.io/http01-parentreffallback: true
+    acme.cert-manager.io/http01-parentreffallback: "true"
   labels:
     access: external 
 spec:
