@@ -11,9 +11,9 @@ spec:
     kind: ListenerSet
     name: resume-listeners
     namespace: resume
-    sectionName: resume-http
+    sectionName: resume-https
   hostnames:
-  - resume.huntrrose.local
+  - resume.huntrrose.com
   rules:
   - backendRefs:
     - name: resume-svc
