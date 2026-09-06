@@ -6,7 +6,7 @@ metadata:
   namespace: resume
 spec:
   # Reference to VaultConnection
-  vaultConnectionRef: cnpg-cluster/vluster-vault-connection 
+  vaultConnectionRef: cnpg-cluster/cluster-vault-connection 
 
   # Authentication method
   method: kubernetes
