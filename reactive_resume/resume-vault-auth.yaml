@@ -16,5 +16,5 @@ spec:
 
   # Kubernetes auth configuration
   kubernetes:
-    role: resume
+    role: resume_db
     serviceAccount: default
