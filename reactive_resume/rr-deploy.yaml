@@ -23,6 +23,8 @@ spec:
             value: "http://resume.huntrrose.com"
           - name: PUBLIC_URL
             value: "http://resume.huntrrose.com"
+          - name: AUTH_SECRET
+            value: "something"
           - name: PG_USER
             valueFrom:
               secretKeyRef:
