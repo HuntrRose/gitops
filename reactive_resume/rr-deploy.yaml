@@ -26,9 +26,9 @@ spec:
           - name: AUTH_SECRET
             value: "something"
           - name: PG_USER
-            value: "reactive_resume"
+            value: reactive_resume
           - name: PD_PASS
-            value: "reactive_resume"
+            value: reactive_resume
           # - name: PG_USER
           #   valueFrom:
           #     secretKeyRef:
