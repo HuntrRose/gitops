@@ -34,7 +34,7 @@ spec:
                 name: resume-db-secret
                 key: password
           - name: DATABASE_URL
-            value: "postgres://$(PG_USER):$(PG_PASS)cnpg-cluster-rw.cnpg-cluster.svc.cluster.local:5432/resume-db"
+            value: "postgres://$(PG_USER):$(PG_PASS)@cnpg-cluster-rw.cnpg-cluster.svc.cluster.local:5432/resume-db"
         ports:
           - containerPort: 3000
         volumeMounts:
