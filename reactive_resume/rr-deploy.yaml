@@ -20,9 +20,9 @@ spec:
         name: reactive-resume
         env:
           - name: APP_URL
-            value: "http://resume.huntrrose.com"
+            value: "https://resume.huntrrose.com"
           - name: PUBLIC_URL
-            value: "http://resume.huntrrose.com"
+            value: "https://resume.huntrrose.com"
           - name: AUTH_SECRET
             value: "something"
           #- name: PG_USER
