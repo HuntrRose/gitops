@@ -55,6 +55,10 @@ spec:
   owner: reactive_resume
   cluster:
     name: cnpg-cluster
+  schemas:
+    - name: drizzle
+      owner: reactive_resume
+      ensure: present
   extensions:
     - name: bloom
       ensure: present
