@@ -59,6 +59,10 @@ spec:
     - name: drizzle
       owner: reactive_resume
       ensure: present
+  postInitSQL:
+    - "GRANT CONNECT, CREATE ON DATABASE resume-db TO reactive_resume;"
+    - "GRANT ALL PRIVILEGES ON SCHEMA drizzle TO reactive_resume;"
+    - "GRANT USAGE ON SCHEMA drizzle TO reactive_resume;"
   extensions:
     - name: bloom
       ensure: present
