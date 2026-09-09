@@ -11,10 +11,10 @@ cluster:
       enabled: true
     prometheusRule:
       enabled: true
-#  affinity:
-#    enablePodAntiAffinity: true
+  affinity:
+    enablePodAntiAffinity: true
 #    topologyKey: kubernetes.io/hostname
-#    podAntiAffinityType: required
+    podAntiAffinityType: required
 #    nodeSelector:
 #      node-role.kubernetes.io/postgres: ""
 #    tolerations:
