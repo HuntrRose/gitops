@@ -19,7 +19,7 @@ cluster:
       memory: 500Mi
   affinity:
     enablePodAntiAffinity: true
-#    topologyKey: kubernetes.io/hostname
+    topologyKey: kubernetes.io/hostname
     podAntiAffinityType: required
   additionalPodAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
