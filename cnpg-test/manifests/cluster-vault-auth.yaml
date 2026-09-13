@@ -1,0 +1,31 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  name: cluster-vault-connection
+  namespace: cnpg-cluster
+spec:
+  address: http://vault.vault.svc.cluster.local:8200
+  skipTLSVerify: true
+---
+# vault-auth.yaml
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: cluster-vault-auth
+  namespace: cnpg-cluster
+spec:
+  # Reference to VaultConnection
+  # vaultConnectionRef: vault-secrets-operator/default
+  vaultConnectionRef: cluster-vault-connection
+
+  # Authentication method
+  method: kubernetes
+
+  # Mount path for auth method
+  mount: kubernetes
+
+  # Kubernetes auth configuration
+  kubernetes:
+    role: cnpg_cluster
+    # role: test
+    serviceAccount: cnpg-cluster

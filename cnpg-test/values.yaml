@@ -1,0 +1,37 @@
+cluster:
+  storage:
+    size: 10Gi
+    storageClass: local-path
+  walStorage:
+    enabled: true
+    storageClass: nfs-server
+  monitoring:
+    enabled: true
+    podMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true
+  resources:
+    limits:
+      memory: 2Gi
+    requests:
+      cpu: 500m
+      memory: 500Mi
+  affinity:
+    enablePodAntiAffinity: true
+#    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
+#    nodeSelector:
+#      node-role.kubernetes.io/postgres: ""
+#    tolerations:
+#    - key: node-role.kubernetes.io/postgres
+#      operator: Exists
+#      effect: NoSchedule
+#  roles: 
+#    - name: ncdb 
+#      ensure: present
+#      comment: NextCloud DB User
+#      login: true
+#      superuser: false
+#      passwordSecret:
+#        name: nc-db-user 
