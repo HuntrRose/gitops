@@ -21,6 +21,15 @@ cluster:
     enablePodAntiAffinity: true
 #    topologyKey: kubernetes.io/hostname
     podAntiAffinityType: required
+    additionalPodAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpression:
+              - key: cnpg.io/cluster
+                operator: in
+                values:
+                  - cnpg-test-cluster
+          topologyKeY: "kubernetes.io/hostname"
 #    nodeSelector:
 #      node-role.kubernetes.io/postgres: ""
 #    tolerations:
