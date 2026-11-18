@@ -29,10 +29,10 @@ spec:
       labels:
         app: shaarli
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
+      #securityContext:
+      #  runAsNonRoot: true
+      #  runAsUser: 1000
+      #  runAsGroup: 1000
       containers:
         - name: shaarli
           image: ghcr.io/shaarli/shaarli:v0.16.10
