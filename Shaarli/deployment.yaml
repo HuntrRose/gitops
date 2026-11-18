@@ -29,33 +29,37 @@ spec:
       labels:
         app: shaarli
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
-      - name: shaarli
-        image:  ghcr.io/shaarli/shaarli:latest
-       # securityContext:
-       #   allowPrivilegeEscalation: false
-       #   capabilities:
-       #     drop: ["ALL"]
-       #   seccompProfile:
-       #     type: RuntimeDefault
-       #   runAsNonRoot: true
-       #   runAsUser: 1000
-       #   runAsGroup: 1000
-        resources:
-          limits:
-            memory: "512Mi"
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-        ports:
-          - containerPort: 80
-        volumeMounts:
-          - name: shaarli-data
-            mountPath: /var/www/shaarli/data
-            subPath: shaarli-data
-          - name: shaarli-data
-            mountPath: /var/www/shaarli/cache
-            subPath: shaarli-cache
+        - name: shaarli
+          image: ghcr.io/shaarli/shaarli:v0.16.10
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          #   runAsNonRoot: true
+          #   runAsUser: 1000
+          #   runAsGroup: 1000
+          resources:
+            limits:
+              memory: "512Mi"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: shaarli-data
+              mountPath: /var/www/shaarli/data
+              subPath: shaarli-data
+            - name: shaarli-data
+              mountPath: /var/www/shaarli/cache
+              subPath: shaarli-cache
       volumes:
         - name: shaarli-data
           persistentVolumeClaim:
@@ -63,10 +67,10 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: shaarli
   namespace: shaarli
-spec: 
+spec:
   selector:
     app: shaarli
   ports:
@@ -116,11 +120,10 @@ spec:
       kind: ListenerSet
   rules:
     - matches:
-      - path:
+        - path:
             type: PathPrefix
             value: /
       backendRefs:
         - name: shaarli
           namespace: shaarli
           port: 80
-  
