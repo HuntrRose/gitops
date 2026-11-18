@@ -126,4 +126,4 @@ spec:
       backendRefs:
         - name: shaarli
           namespace: shaarli
-          port: 80
+          port: 443
