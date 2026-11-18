@@ -35,7 +35,7 @@ spec:
       #  runAsGroup: 1000
       containers:
         - name: shaarli
-          image: ghcr.io/shaarli/shaarli:v0.16.10
+          image: ghcr.io/shaarli/shaarli:v0.16.8
           #securityContext:
           #  allowPrivilegeEscalation: false
           #  capabilities:
@@ -126,4 +126,4 @@ spec:
       backendRefs:
         - name: shaarli
           namespace: shaarli
-          port: 443
+          port: 80
