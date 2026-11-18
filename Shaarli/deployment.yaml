@@ -36,12 +36,12 @@ spec:
       containers:
         - name: shaarli
           image: ghcr.io/shaarli/shaarli:v0.16.10
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop: ["ALL"]
-            seccompProfile:
-              type: RuntimeDefault
+          #securityContext:
+          #  allowPrivilegeEscalation: false
+          #  capabilities:
+          #    drop: ["ALL"]
+          #  seccompProfile:
+          #    type: RuntimeDefault
           #   runAsNonRoot: true
           #   runAsUser: 1000
           #   runAsGroup: 1000
